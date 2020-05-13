@@ -16,7 +16,7 @@ mix.js('resources/js/app.js', 'public/js')
 
 mix.styles([
     'public/css/adminlte.css',
-    'public/plugins/fontawesome-free/css/all.min.css',
+    'public/plugins/fontawesome-free/css/all.css',
     'public/plugins/overlayScrollbars/css/OverlayScrollbars.min.css',
     'public/css/app.css'
 ], 'public/css/all.css');

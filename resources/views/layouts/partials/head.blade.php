@@ -13,7 +13,7 @@
     {{-- <link rel="stylesheet" href="dist/css/adminlte.min.css"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+    <link href="{{  secure_asset('css/all.css') }}" rel="stylesheet">
 
     <!-- overlayScrollbars -->
     {{-- <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css"> --}}
