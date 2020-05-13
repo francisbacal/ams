@@ -11,7 +11,7 @@ trait HasPermissionsTrait
     {
 
         $permissions = $this->getAllPermissions($permissions);
-        dd($permissions);
+        // dd($permissions);
         if ($permissions === null) {
             return $this;
         }

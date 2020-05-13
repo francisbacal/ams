@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use Closure;
 
 class RoleMiddleware
@@ -14,20 +13,24 @@ class RoleMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $role, $permission = null)
     {
-        if (!$request->user()->hasRole($role)) {
 
-            return redirect(RouteServiceProvider::HOME);
+        if (\Auth::check() && $request->user()->hasRole($role) != null) {
+            if (!$request->user()->hasRole($role)) {
 
+                abort(401);
+
+            }
+
+            if ($permission !== null && !$request->user()->can($permission)) {
+
+                abort(401);
+            }
+
+            return $next($request);
+        } else {
+            abort(401);
         }
-
-        if ($permission !== null && !$request->user()->can($permission)) {
-
-            return redirect(RouteServiceProvider::HOME);
-        }
-
-        return $next($request);
-
     }
 }

@@ -40,7 +40,8 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
+        $this->middleware('role:admin');
     }
 
     /**
@@ -70,15 +71,14 @@ class RegisterController extends Controller
         $role = Role::where('slug', 'employee');
         $permission = Permission::where('slug', 'view-asset');
 
+        dd($role);
+        dd($permission);
+
         $newUser = new User();
         $newUser->firstname = $data['firstname'];
         $newUser->lastname = $data['lastname'];
         $newUser->email = $data['email'];
         $newUser->password = Hash::make($data['password']);
-
-        if ($data['section_id']) {
-            $newUser->section_id = $data['section_id'];
-        }
 
         $newUser->save();
         $newUser->roles()->attach($role);
