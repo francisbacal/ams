@@ -7,7 +7,10 @@ use App\Permission;
 use App\Providers\RouteServiceProvider;
 use App\Role;
 use App\User;
+use Auth;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -40,7 +43,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $user = Auth::user();
         $this->middleware('role:admin');
     }
 
@@ -68,11 +71,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $role = Role::where('slug', 'employee');
-        $permission = Permission::where('slug', 'view-asset');
+        $role = Role::where('slug', 'employee')->first();
+        $permission = Permission::where('slug', 'view-asset')->first();
 
-        dd($role);
-        dd($permission);
+        // dd($role);
+        // dd($permission);
 
         $newUser = new User();
         $newUser->firstname = $data['firstname'];
@@ -84,11 +87,19 @@ class RegisterController extends Controller
         $newUser->roles()->attach($role);
         $newUser->permissions()->attach($permission);
 
-        // return User::create([
-        //     'firstname' => $data['firstname'],
-        //     'lastname' => $data['lastname'],
-        //     'email' => $data['email'],
-        //     'password' => Hash::make($data['password']),
-        // ]);
+        $this->newUser = "$newUser->firstname  $newUser->lastname";
+    }
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        //$this->guard()->login($user);
+
+        //return $this->registered($request, $user)
+        //                ?: redirect($this->redirectPath());
+
+        return redirect(route('register'))->with('message', "$this->newUser registered.");
     }
 }

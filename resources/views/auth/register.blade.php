@@ -4,9 +4,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if (session()->has('message'))
+            <div class="alert alert-success mb-3" role="alert">
+                {{ session()->get('message') }}
+            </div>
+            @endif
             <div class="card">
                 <div class="card-header">{{ __('Register New Employee') }}</div>
-
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf

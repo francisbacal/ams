@@ -17,11 +17,15 @@ class CreateAssetsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('code');
-            $table->unsignedBigInteger('item_id');
+            $table->string('serial');
+            $table->float('price', 12, 2);
+            $table->longText('description')->nullable();
+            $table->string('image');
+            $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('asset_status_id')->default(1);
             $table->timestamps();
 
-            $table->foreign('item_id')->references('id')->on('items');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('asset_status_id')->references('id')->on('asset_statuses');
             $table->softDeletes();
         });

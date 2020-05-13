@@ -13,7 +13,11 @@ class Asset extends Model
     protected $fillable = [
         'name',
         'code',
-        'item_id',
+        'price',
+        'serial',
+        'description',
+        'image',
+        'category_id',
         'asset_status_id',
         'created_at',
         'updated_at',
