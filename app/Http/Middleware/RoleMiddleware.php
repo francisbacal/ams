@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Role;
 use Closure;
 
 class RoleMiddleware
@@ -13,24 +14,38 @@ class RoleMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $role, $permission = null)
+    public function handle($request, Closure $next, ...$roles)
     {
+        if (count($roles) === 1) {
+            $role = implode($roles);
 
-        if (\Auth::check() && $request->user()->hasRole($role) != null) {
-            if (!$request->user()->hasRole($role)) {
+            if ($role != "all") {
+                if (!$request->user()->hasRole($role)) {
 
-                abort(401);
+                    abort(401);
 
-            }
+                }
+                return $next($request);
+            } else {
+                $role = Role::all()->pluck('slug');
+                $roles = (object) $role;
 
-            if ($permission !== null && !$request->user()->can($permission)) {
+                if (!$request->user()->checkRole($roles)) {
 
-                abort(401);
-            }
+                    abort(401);
 
-            return $next($request);
+                }
+                return $next($request);
+            };
         } else {
-            abort(401);
+            $role = (object) $roles;
+            if (!$request->user()->checkRole($role)) {
+
+                abort(401);
+
+            }
+            return $next($request);
         }
+
     }
 }

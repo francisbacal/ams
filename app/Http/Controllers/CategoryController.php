@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use Gate;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
 {
@@ -22,7 +24,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
     }
@@ -81,5 +83,26 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+    }
+
+    public function manageCategory()
+    {
+        $categories = Category::where('parent_id', '=', null)->get();
+        $allCategories = Category::pluck('name', 'id')->all();
+
+        return view('categories.categoryTreeview', compact('categories', 'allCategories'));
+    }
+    public function addCategory(Request $request)
+    {
+        abort_if(Gate::denies('create-category'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $input = $request->all();
+        $input['parent_id'] = empty($input['parent_id']) ? null : $input['parent_id'];
+
+        Category::create($input);
+        return back()->with('success', 'New Category added successfully.');
     }
 }

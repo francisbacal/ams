@@ -8,7 +8,16 @@ class Category extends Model
 {
     protected $fillable = [
         'name',
-        'parent',
+        'parent_id',
 
     ];
+
+    /*================================
+    | ELOQUENT - RELATIONSHIP
+    |-------------------------------*/
+
+    public function childs()
+    {
+        return $this->hasMany('App\Category', 'parent_id', 'id');
+    }
 }

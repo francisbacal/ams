@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('login'));
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('category-tree-view', ['uses' => 'CategoryController@manageCategory'])->middleware("role:all");
+Route::post('add-category', ['as' => 'add.category', 'uses' => 'CategoryController@addCategory']);
+
+Route::resource('permissions', 'PermissionController');

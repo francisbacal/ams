@@ -13,36 +13,52 @@ class PermissionSeeder extends Seeder
     {
         $permissions = [
             [
-                'name' => 'Create Item',
-                'slug' => 'create-item',
+                'name' => 'Item Create',
+                'slug' => 'item-create',
             ],
             [
-                'name' => 'Edit Item',
-                'slug' => 'edit-item',
+                'name' => 'Item Edit',
+                'slug' => 'item-edit',
             ],
             [
-                'name' => 'View Item',
-                'slug' => 'view-item',
+                'name' => 'Item View',
+                'slug' => 'item-view',
             ],
             [
-                'name' => 'Destroy Item',
-                'slug' => 'destroy-item',
+                'name' => 'Item Destroy',
+                'slug' => 'item-destroy',
             ],
             [
-                'name' => 'Create Asset',
-                'slug' => 'create-asset',
+                'name' => 'Asset Create',
+                'slug' => 'asset-create',
             ],
             [
-                'name' => 'Edit Asset',
-                'slug' => 'edit-asset',
+                'name' => 'Asset Edit',
+                'slug' => 'asset-edit',
             ],
             [
-                'name' => 'View Asset',
-                'slug' => 'view-asset',
+                'name' => 'Asset View',
+                'slug' => 'asset-view',
             ],
             [
-                'name' => 'Destroy Asset',
-                'slug' => 'destroy-asset',
+                'name' => 'Asset Destroy',
+                'slug' => 'asset-destroy',
+            ],
+            [
+                'name' => 'Category Create',
+                'slug' => 'category-create',
+            ],
+            [
+                'name' => 'Category Edit',
+                'slug' => 'category-edit',
+            ],
+            [
+                'name' => 'Category View',
+                'slug' => 'category-view',
+            ],
+            [
+                'name' => 'Category Destroy',
+                'slug' => 'category-destroy',
             ],
         ];
 
