@@ -13,3 +13,10 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
+
+mix.styles([
+    'public/css/adminlte.css',
+    'public/plugins/fontawesome-free/css/all.min.css',
+    'public/plugins/overlayScrollbars/css/OverlayScrollbars.min.css',
+    'public/css/app.css'
+], 'public/css/all.css');
