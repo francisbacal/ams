@@ -1,1 +1,70 @@
-//
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+body {
+    font-family: 'Source Sans Pro' !important;
+    font-size: 16px;
+}
+
+
+.login-card-body {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12),
+        0 2px 2px rgba(0, 0, 0, 0.12),
+        0 4px 4px rgba(0, 0, 0, 0.12),
+        0 8px 8px rgba(0, 0, 0, 0.12),
+        0 16px 16px rgba(0, 0, 0, 0.12);
+}
+
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.6rem;
+    color: #e3342f;
+}
+
+.brand-img {
+    float: left;
+    line-height: .8;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    margin-top: -3px;
+    max-height: 53px !important;
+    width: auto;
+}
+
+.brand-txt {
+    font-size: 2rem;
+    font-weight: 900 !important;
+    // margin-left: 0.6rem;
+
+}
+
+.layout-navbar-fixed .wrapper .sidebar-dark-primary .brand-link:not([class*="navbar"]) {
+    background-color: $blue;
+}
+
+[class*='sidebar-dark'] .user-panel {
+    border-bottom: 1px solid #60B2E5;
+    color: white;
+}
+
+[class*='sidebar-dark'] .brand-link {
+    border-bottom: none;
+    color: rgba(255, 255, 255, 1);
+}
+
+[class*='sidebar-dark-'] .sidebar a {
+    color: #fff;
+
+    &.hover {
+        color: #60B2E5;
+    }
+}
