@@ -2,13 +2,15 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Permissions\HasPermissionsTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+
+    use HasPermissionsTrait;
 
     /**
      * The attributes that are mass assignable.

@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class GroupSeeder extends Seeder
+class ItemSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,5 +11,6 @@ class GroupSeeder extends Seeder
      */
     public function run()
     {
+        //
     }
 }

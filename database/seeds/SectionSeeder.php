@@ -14,22 +14,25 @@ class SectionSeeder extends Seeder
     {
         $sections = [
             [
-                'name' => "Management"
+                'name' => "Unassigned",
             ],
             [
-                'name' => "IT"
+                'name' => "Management",
             ],
             [
-                'name' => "Piping"
+                'name' => "IT",
             ],
             [
-                'name' => "Mechanical"
+                'name' => "Piping",
             ],
             [
-                'name' => "Electrical"
+                'name' => "Mechanical",
             ],
             [
-                'name' => "Civil"
+                'name' => "Electrical",
+            ],
+            [
+                'name' => "Civil",
             ],
         ];
 

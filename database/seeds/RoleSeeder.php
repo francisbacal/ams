@@ -14,22 +14,26 @@ class RoleSeeder extends Seeder
     {
         $roles = [
             [
-                'name' => 'Admin'
+                'name' => 'Admin',
+                'slug' => 'admin',
             ],
             [
-                'name' => 'General Manager'
+                'name' => 'General Manager',
+                'slug' => 'general-manager',
             ],
             [
-                'name' => 'Section Manager'
+                'name' => 'Section Manager',
+                'slug' => 'section-manager',
             ],
             [
-                'name' => 'Group Manager'
+                'name' => 'Group Manager',
+                'slug' => 'group-manager',
             ],
             [
-                'name' => 'Regular Employee'
+                'name' => 'Regular Employee',
+                'slug' => 'employee',
             ],
         ];
-
 
         DB::table('roles')->insert($roles);
     }
