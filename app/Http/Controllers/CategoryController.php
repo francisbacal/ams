@@ -71,7 +71,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        abort_if(Gate::denies('category-edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $oldName = $category->name;
+
+        $validatedData = $this->validate($request, [
+            'name' => 'required|unique:categories,name|string|max:30',
+        ]);
+
+        $category->update($validatedData);
+        return back()->with('success', "{$oldName} updated to {$category->name} successfully.");
     }
 
     /**
@@ -82,7 +91,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        abort_if(Gate::denies('category-destroy'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $category->delete();
+        return back()->with('success', "{$category->name} successfully Deleted");
+
     }
 
     public function manageCategory()
@@ -92,12 +105,13 @@ class CategoryController extends Controller
 
         return view('categories.categoryTreeview', compact('categories', 'allCategories'));
     }
+
     public function addCategory(Request $request)
     {
-        abort_if(Gate::denies('create-category'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('category-create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:categories,name|string|max:30',
         ]);
         $input = $request->all();
         $input['parent_id'] = empty($input['parent_id']) ? null : $input['parent_id'];

@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
-<div class="container border border-primary rounded">
+<div class="container border border-primary rounded bg-white">
     <div class="row">
         <div class="col-12 bg-primary p-2">
             <h2 class="mx-3">Categories</h2>
@@ -25,12 +25,13 @@
                         @endforeach
                     </ul>
                 </div>
-                @can('edit-category')
+                @can('category-edit')
                 <div class="col-md-6">
                     <h4 class="mb-3">Add New Category</h4>
 
 
-                    {!! Form::open(['action'=>'CategoryController@addCategory', 'method' => 'POST']) !!}
+                    {!! Form::open(['action'=>'CategoryController@addCategory', 'method' => 'POST', 'id' =>
+                    'categoryForm']) !!}
 
 
                     @if ($message = Session::get('success'))
@@ -50,14 +51,19 @@
 
                     <div class="form-group {{ $errors->has('parent_id') ? 'has-error' : '' }}">
                         {!! Form::label('Parent Category:') !!}
-                        {!! Form::select('parent_id',$allCategories, old('parent_id'), ['class'=>'form-control',
-                        'placeholder'=>'Select Parent Category']) !!}
+                        {!! Form::select('parent_id',$allCategories, old('parent_id'), ['id'=> 'categorySelect',
+                        'class'=>'form-control']) !!}
                         <span class="text-danger">{{ $errors->first('parent_id') }}</span>
                     </div>
 
 
                     <div class="form-group">
-                        <button class="btn btn-success">Add New</button>
+                        <button id="addCategoryBtn" data-link="{{ route('add.category') }}" class="btn btn-success">Add
+                            New</button>
+                        <button id="editCategoryBtn" data-link="{{ route('categories.index') }}"
+                            class="btn btn-info">Edit</button>
+                        <button id="deleteCategoryBtn" data-link="{{ route('categories.index') }}"
+                            class="btn btn-danger">Delete</button>
                     </div>
 
 

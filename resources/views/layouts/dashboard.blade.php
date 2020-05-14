@@ -125,6 +125,9 @@
     {{-- <script src="dist/js/pages/dashboard.js"></script> --}}
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
+
+    {{-- SWAL ALERT 2 --}}
+    <script src="{{  asset('js/sweetalert2.js') }}"></script>
 </body>
 
 </html>

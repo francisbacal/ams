@@ -37386,6 +37386,55 @@ $.fn.extend({
 /* Initialization of treeviews */
 
 $('#tree1').treed();
+/*=============================================
+| CATEGORY SECTION JS
+|============================================*/
+
+var categoryForm = $('#categoryForm');
+var categorySelect = $('#categorySelect');
+/*==========
+| ADD BTN
+|=========*/
+
+$('#addCategoryBtn').click(function (e) {
+  e.preventDefault();
+  addAction = $(this).attr("data-link");
+  categoryForm.attr('action', addAction);
+  categoryForm.submit();
+});
+/*==========
+| EDIT BTN
+|=========*/
+
+$('#editCategoryBtn').click(function (e) {
+  e.preventDefault();
+  editAction = $(this).attr("data-link") + "/" + categorySelect.val();
+  categoryForm.attr('action', editAction);
+  categoryForm.prepend('<input name="_method" type="hidden" value="PUT" />').submit(); // console.log(editAction);
+});
+/*==========
+| DELETE BTN
+|=========*/
+
+$('#deleteCategoryBtn').click(function (e) {
+  e.preventDefault();
+  deleteAction = $(this).data("link") + "/" + categorySelect.val();
+  categoryForm.attr('action', deleteAction);
+  categoryForm.prepend('<input name="_method" type="hidden" value="DELETE" />');
+  Swal.fire({
+    title: 'Are you sure you want to delete this?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#60B2E5',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then(function (result) {
+    if (result.value) {
+      categoryForm.submit();
+    }
+  });
+});
 
 /***/ }),
 

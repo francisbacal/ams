@@ -23,5 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('category-tree-view', ['uses' => 'CategoryController@manageCategory'])->middleware("role:all");
 Route::post('add-category', ['as' => 'add.category', 'uses' => 'CategoryController@addCategory']);
+Route::resource('categories', 'CategoryController')->only('update', 'index', 'destroy');
 
 Route::resource('permissions', 'PermissionController');

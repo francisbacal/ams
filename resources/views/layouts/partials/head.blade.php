@@ -13,4 +13,7 @@
     <!-- Theme style -->
     <link href="{{  asset('css/all.css') }}" rel="stylesheet">
 
+    {{-- swal bootstrap --}}
+    <link href="{{  asset('css/bootstrap-4.min.css') }}" rel="stylesheet">
+
 </head>
