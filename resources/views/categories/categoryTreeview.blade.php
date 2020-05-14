@@ -1,16 +1,16 @@
-@extends('layouts.dashboard')
+@extends('layouts.category')
 @section('content')
 <div class="container border border-primary rounded bg-white">
     <div class="row">
         <div class="col-12 bg-primary p-2">
-            <h2 class="mx-3">Categories</h2>
+            <h3 class="mx-3">List</h3>
         </div>
     </div>
     <div class="row m-5">
         <div class="col-12">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <h4 class="mb-3">Category List</h4>
+                    <h4 class="mb-3">Treeview</h4>
                     <ul id="tree1">
 
                         @foreach($categories as $category)
@@ -27,7 +27,7 @@
                 </div>
                 @can('category-edit')
                 <div class="col-md-6">
-                    <h4 class="mb-3">Add New Category</h4>
+                    <h4 class="mb-3">Category Actions</h4>
 
 
                     {!! Form::open(['action'=>'CategoryController@addCategory', 'method' => 'POST', 'id' =>
@@ -58,16 +58,15 @@
 
 
                     <div class="form-group">
-                        <button id="addCategoryBtn" data-link="{{ route('add.category') }}" class="btn btn-success">Add
-                            New</button>
+                        <button id="addCategoryBtn" data-link="{{ route('add.category') }}"
+                            class="btn btn-primary">Add</button>
                         <button id="editCategoryBtn" data-link="{{ route('categories.index') }}"
                             class="btn btn-info">Edit</button>
                         <button id="deleteCategoryBtn" data-link="{{ route('categories.index') }}"
                             class="btn btn-danger">Delete</button>
                     </div>
-
-
                     {!! Form::close() !!}
+
                 </div>
                 @endcan
             </div>

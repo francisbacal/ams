@@ -31,11 +31,19 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Dashboard</h1>
+                            <h1 class="m-0 text-dark">Categories</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">Categories</a>
+                                </li>
+
+                                @role('admin')
+                                <li class="breadcrumb-item"><a href="{{ route('categories.trashed') }}">Recycle
+                                        Bin</a>
+                                </li>
+                                @endrole
+
                                 <li class="breadcrumb-item active">AMS v1.0</li>
                             </ol>
                         </div>

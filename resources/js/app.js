@@ -1,5 +1,14 @@
 require('./bootstrap');
 
+//TOOLTIP
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+});
+
+
+//TREE VIEW CATEGORY
+
 $.fn.extend({
     treed: function (o) {
 
@@ -22,6 +31,7 @@ $.fn.extend({
             var branch = $(this); //li with children ul
             branch.prepend("<i class='indicator " + closedClass + "'></i>");
             branch.addClass('branch');
+            branch.children().children().toggle();
             branch.on('click', function (e) {
                 if (this == e.target) {
                     var icon = $(this).children('i:first');

@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return redirect('/category-tree-view');
     }
 
     /**
@@ -94,7 +94,7 @@ class CategoryController extends Controller
         abort_if(Gate::denies('category-destroy'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $category->delete();
-        return back()->with('success', "{$category->name} successfully Deleted");
+        return back()->with('success', "{$category->name} successfully deleted");
 
     }
 
@@ -118,5 +118,31 @@ class CategoryController extends Controller
 
         Category::create($input);
         return back()->with('success', 'New Category added successfully.');
+    }
+
+    public function softDeleted(Request $request)
+    {
+        abort_if(Gate::denies('category-create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $user = $request->user();
+        $categories = Category::onlyTrashed()->get();
+
+        return view('categories.categorysoft')->with('categories', $categories);
+    }
+    public function restore($category)
+    {
+
+        abort_if(Gate::denies('category-edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        Category::withTrashed()->find($category)->restore();
+        return back()->with('success', 'Restored successfully.');
+    }
+    public function restoreAll()
+    {
+
+        abort_if(Gate::denies('category-edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        Category::onlyTrashed()->restore();
+        return back()->with('success', 'Restored all successfully');
     }
 }

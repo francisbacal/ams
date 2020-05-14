@@ -37326,7 +37326,12 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //TOOLTIP
+
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+}); //TREE VIEW CATEGORY
 
 $.fn.extend({
   treed: function treed(o) {
@@ -37352,6 +37357,7 @@ $.fn.extend({
 
       branch.prepend("<i class='indicator " + closedClass + "'></i>");
       branch.addClass('branch');
+      branch.children().children().toggle();
       branch.on('click', function (e) {
         if (this == e.target) {
           var icon = $(this).children('i:first');

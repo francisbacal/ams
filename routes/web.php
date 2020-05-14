@@ -21,8 +21,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('category-tree-view', ['uses' => 'CategoryController@manageCategory'])->middleware("role:all");
-Route::post('add-category', ['as' => 'add.category', 'uses' => 'CategoryController@addCategory']);
+/*-----------------------
+| CATEGORIES
+|----------------------*/
+
+Route::get('/categories/trashed', 'CategoryController@softDeleted')
+    ->name('categories.trashed')->middleware("role:admin");
+Route::put('/categories/{category}/restore', 'CategoryController@restore')
+    ->name('categories.restore')->middleware("role:admin");
+Route::post('/categories/trashed/restoreall', 'CategoryController@restoreAll')
+    ->name('categories.restoreall')->middleware("role:admin");
+Route::post('add-category', ['as' => 'add.category', 'uses' => 'CategoryController@addCategory'])->middleware("role:admin");
+
+Route::get('category-tree-view', ['uses' => 'CategoryController@manageCategory']);
 Route::resource('categories', 'CategoryController')->only('update', 'index', 'destroy');
 
 Route::resource('permissions', 'PermissionController');
