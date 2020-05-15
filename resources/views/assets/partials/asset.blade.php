@@ -43,11 +43,17 @@
             </i>
             Edit
         </a>
-        <a class="btn btn-danger btn-sm my-1" href="#">
-            <i class="fas fa-trash">
-            </i>
-            Delete
-        </a>
+        <form action="{{ route('assets.destroy', ['asset'=> $asset->id]) }}" method="POST"
+            id="deleteAssetForm{{ $asset->id }}" class="d-inline">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger btn-sm my-1 deleteAssetBtn" href="#"
+                data-form="deleteAssetForm{{ $asset->id }}">
+                <i class="fas fa-trash">
+                </i>
+                Delete
+            </button>
+        </form>
     </td>
 </tr>
 

@@ -41,6 +41,9 @@
                                 @role('admin')
                                 <li class="breadcrumb-item"><a href="{{ route('assets.create') }}">Create</a>
                                 </li>
+                                <li class="breadcrumb-item"><a href="{{ route('assets.trashed') }}">Recycle
+                                        Bin</a>
+                                </li>
                                 @endrole
 
                                 <li class="breadcrumb-item active">AMS v1.0</li>

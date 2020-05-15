@@ -46,7 +46,19 @@ Route::resource('categories', 'CategoryController')->only('update', 'index', 'de
 
 Route::resource('assets', 'AssetController');
 
+// Route::get('/assets-trashed', ['as' => 'assets.trashed', 'uses' => 'AssetController@softDeleted']);
+
+Route::get('/assets-trashed', 'AssetController@softDeleted')
+    ->name('assets.trashed')->middleware("role:admin");
+
+Route::put('/assets-trashed/{asset}/restore', 'AssetController@restore')
+    ->name('assets.restore')->middleware("role:admin");
+
+Route::post('/assets-trashed/restoreall', 'AssetController@restoreAll')
+    ->name('assets.restoreall')->middleware("role:admin");
+
 /*-----------------------
 | PERMISSIONS
 |----------------------*/
+
 Route::resource('permissions', 'PermissionController');

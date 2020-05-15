@@ -69,7 +69,7 @@ class AssetController extends Controller
         $validatedData['code'] = $code;
         // dd($validatedData);
 
-        $image_path = $request->file("image")->store('public/products');
+        $image_path = $request->file("image")->store('public/assets');
 
         $asset = new Asset($validatedData);
         $asset->image = Storage::url($image_path);
@@ -116,7 +116,28 @@ class AssetController extends Controller
     public function update(Request $request, Asset $asset)
     {
         abort_if(Gate::denies('asset-edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        return "HELLO";
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:100',
+            'price' => 'required|numeric',
+            'serial' => 'required|string',
+            'description' => 'required|string',
+            'category_id' => 'required|string',
+            'asset_status_id' => 'required',
+        ]);
+
+        $asset->update($validatedData);
+
+        if ($request->hasFile('image')) {
+
+            $image_path = $request->file("image")->store('public/assets');
+            $asset->image = Storage::url($image_path);
+        }
+
+        $asset->save();
+
+        return redirect()->route('assets.show', ['asset' => $asset->id])->with('success', "$asset->name is successfully edited");
+
     }
 
     /**
@@ -127,6 +148,49 @@ class AssetController extends Controller
      */
     public function destroy(Asset $asset)
     {
-        //
+        abort_if(Gate::denies('asset-destroy'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $asset->delete();
+
+        return redirect()->back()->with('message', "$asset->name is succesfully deleted.");
+    }
+
+    /*-----------------------
+    | SOFTDELETED
+    |----------------------*/
+
+    public function softDeleted(Request $request)
+    {
+        abort_if(Gate::denies('asset-edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $user = $request->user();
+        $assets = Asset::onlyTrashed()->get();
+
+        return view('assets.assetsoft')->with('assets', $assets);
+    }
+
+    /*-----------------------
+    | RESTORE
+    |----------------------*/
+    public function restore($asset)
+    {
+
+        abort_if(Gate::denies('asset-edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        Asset::withTrashed()->find($asset)->restore();
+        return back()->with('success', 'Restored successfully.');
+    }
+
+    /*-----------------------
+    | RESTORE ALL
+    |----------------------*/
+
+    public function restoreAll()
+    {
+
+        abort_if(Gate::denies('asset-edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        Asset::onlyTrashed()->restore();
+        return back()->with('success', 'Restored all successfully');
     }
 }

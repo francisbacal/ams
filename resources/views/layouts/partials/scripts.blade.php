@@ -26,7 +26,8 @@
 <script src="{{  asset('dist/js/demo.js') }}"></script>
 
 {{-- SWAL ALERT 2 --}}
-<script src="{{  asset('js/sweetalert2.js') }}"></script>
+{{-- <script src="{{  asset('js/sweetalert2.js') }}"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 {{-- CUSTOM --}}
 <script src="{{  asset('js/app.js') }}"></script>

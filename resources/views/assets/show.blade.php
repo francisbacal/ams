@@ -1,12 +1,7 @@
 @extends('layouts.asset')
 
 @section('content')
-@if ($message = Session::get('success'))
-<div class="alert alert-success alert-block my-3">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>{{ $message }}</strong>
-</div>
-@endif
+
 <div class="row justify-content-center">
     <div class="col-lg-12">
         <section class="content">
@@ -67,6 +62,8 @@
                                         <td>{{ $asset->description }}</td>
                                     </tr>
                                 </table>
+                                <a href="{{ route('assets.index') }}" class="text-primary mt-5"><i
+                                        class="fas fa-arrow-left"></i> Back to Assets List</a>
                             </div>
                         </div>
                         <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">

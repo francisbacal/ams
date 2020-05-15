@@ -37433,6 +37433,27 @@ $("#imageUpload").change(function () {
   readURL(this);
   $('#asset-image-preview').removeClass('d-none');
 });
+/*==========
+| DELETE BTN
+|=========*/
+
+$('.deleteAssetBtn').click(function (e) {
+  e.preventDefault();
+  deleteForm = "#" + $(this).data("form");
+  Swal.fire({
+    title: 'Are you sure you want to delete this?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#60B2E5',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then(function (result) {
+    if (result.value) {
+      $(deleteForm).submit();
+    }
+  });
+});
 
 /***/ }),
 

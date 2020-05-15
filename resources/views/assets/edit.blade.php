@@ -1,12 +1,7 @@
 @extends('layouts.asset')
 
 @section('content')
-@if ($message = Session::get('success'))
-<div class="alert alert-success alert-block my-3">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>{{ $message }}</strong>
-</div>
-@endif
+
 <div class="row justify-content-center">
     <div class="col-lg-12">
         <section class="content">
@@ -112,7 +107,7 @@
                     </div>
                 </div>
 
-                <div class="row justify-content-end pb-5">
+                <div class="row justify-content-end p-5">
                     <div class="col-auto">
                         <a href="javascript:history.back()" class="text-danger mr-2">Cancel</a>
                         <button type="submit" class="btn btn-primary">Edit Asset</button>
