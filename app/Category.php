@@ -8,18 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Category extends Model
 {
     use SoftDeletes;
-    protected $fillable = [
-        'name',
-        'parent_id',
+    protected $fillable = ['name'];
 
-    ];
+/*================================
+| ELOQUENT - RELATIONSHIP
+|-------------------------------*/
 
-    /*================================
-    | ELOQUENT - RELATIONSHIP
-    |-------------------------------*/
-
-    public function childs()
-    {
-        return $this->hasMany('App\Category', 'parent_id', 'id');
-    }
 }

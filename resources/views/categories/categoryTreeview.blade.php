@@ -10,16 +10,12 @@
         <div class="col-12">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <h4 class="mb-3">Treeview</h4>
                     <ul id="tree1">
 
                         @foreach($categories as $category)
-                        <li>
+                        <li class="bg-info rounded-pill text-center my-2">
 
                             {{ $category->name }}
-                            @if(count($category->childs))
-                            @include('categories.manageChild',['childs' => $category->childs])
-                            @endif
 
                         </li>
                         @endforeach
@@ -48,12 +44,11 @@
                         <span class="text-danger">{{ $errors->first('name') }}</span>
                     </div>
 
-
-                    <div class="form-group {{ $errors->has('parent_id') ? 'has-error' : '' }}">
-                        {!! Form::label('Parent Category:') !!}
-                        {!! Form::select('parent_id',$allCategories, old('parent_id'), ['id'=> 'categorySelect',
+                    <div class="form-group {{ $errors->has('id') ? 'has-error' : '' }}">
+                        {!! Form::label('Category:') !!}
+                        {!! Form::select('id',$selectCategories, old('id'), ['id'=> 'categorySelect',
                         'class'=>'form-control']) !!}
-                        <span class="text-danger">{{ $errors->first('parent_id') }}</span>
+                        <span class="text-danger">{{ $errors->first('id') }}</span>
                     </div>
 
 

@@ -11,6 +11,21 @@ class AssetStatusSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $asset_statuses = [
+            [
+                "name" => "Available",
+            ],
+            [
+                "name" => "Deployed",
+            ],
+            [
+                "name" => "For Diagnosis",
+            ],
+            [
+                "name" => "For Repair",
+            ],
+        ];
+
+        DB::table('asset_statuses')->insert($asset_statuses);
     }
 }

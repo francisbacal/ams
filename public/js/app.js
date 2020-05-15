@@ -37358,34 +37358,6 @@ $.fn.extend({
       branch.prepend("<i class='indicator " + closedClass + "'></i>");
       branch.addClass('branch');
       branch.children().children().toggle();
-      branch.on('click', function (e) {
-        if (this == e.target) {
-          var icon = $(this).children('i:first');
-          icon.toggleClass(openedClass + " " + closedClass);
-          $(this).children().children().toggle();
-        }
-      });
-      branch.children().children().toggle();
-    }); //fire event from the dynamically added icon
-
-    tree.find('.branch .indicator').each(function () {
-      $(this).on('click', function () {
-        $(this).closest('li').click();
-      });
-    }); //fire event to open branch if the li contains an anchor instead of text
-
-    tree.find('.branch>a').each(function () {
-      $(this).on('click', function (e) {
-        $(this).closest('li').click();
-        e.preventDefault();
-      });
-    }); //fire event to open branch if the li contains a button instead of text
-
-    tree.find('.branch>button').each(function () {
-      $(this).on('click', function (e) {
-        $(this).closest('li').click();
-        e.preventDefault();
-      });
     });
   }
 });
@@ -37440,6 +37412,26 @@ $('#deleteCategoryBtn').click(function (e) {
       categoryForm.submit();
     }
   });
+});
+/*=============================================
+| ASSET SECTION JS
+|============================================*/
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      document.getElementById('asset-image-preview').src = e.target.result;
+    };
+
+    reader.readAsDataURL(input.files[0]); // convert to base64 string
+  }
+}
+
+$("#imageUpload").change(function () {
+  readURL(this);
+  $('#asset-image-preview').removeClass('d-none');
 });
 
 /***/ }),

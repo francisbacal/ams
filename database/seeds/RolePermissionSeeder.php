@@ -13,6 +13,22 @@ class RolePermissionSeeder extends Seeder
     {
         $roles_permissions = [
             [
+                "role_id" => 1,
+                "permission_id" => 5,
+            ],
+            [
+                "role_id" => 1,
+                "permission_id" => 6,
+            ],
+            [
+                "role_id" => 1,
+                "permission_id" => 7,
+            ],
+            [
+                "role_id" => 1,
+                "permission_id" => 8,
+            ],
+            [
                 "role_id" => 5,
                 "permission_id" => 11,
             ],

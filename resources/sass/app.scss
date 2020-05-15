@@ -105,10 +105,6 @@ body {
     font-weight: 700;
     position: relative;
     font-size: 1.5rem;
-
-    &:hover {
-        cursor: pointer;
-    }
 }
 
 .tree ul li:before {
@@ -150,7 +146,10 @@ body {
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
     outline: 0;
-    cursor: pointer;
+}
+
+#asset-image-preview {
+    width: 100%;
 }
 
 //END TREE VIEW

@@ -12,30 +12,15 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $categories = [
-            [
-                "name" => "Electronics",
-                "parent_id" => null,
-            ],
-            [
-                "name" => "Hardware",
-                "parent_id" => 1,
-            ],
-            [
-                "name" => "Software",
-                "parent_id" => 1,
-            ],
-            [
-                "name" => "Office Supplies",
-                "parent_id" => null,
-            ],
-            [
-                "name" => "Pens & Markers",
-                "parent_id" => 4,
-            ],
-            [
-                "name" => "Pens & Markers",
-                "parent_id" => 4,
-            ],
+            ["name" => "Laptop"],
+            ["name" => "Monitor"],
+            ["name" => "CPU"],
+            ["name" => "Mouse"],
+            ["name" => "Keyboard"],
+            ["name" => "UPS"],
+            ["name" => "Software"],
+            ["name" => "Consumables"],
+            ["name" => "Other Accessories"],
         ];
 
         DB::table('categories')->insert($categories);

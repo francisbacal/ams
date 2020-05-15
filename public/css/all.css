@@ -39329,10 +39329,6 @@ html.os-html,html.os-html>.os-host{display:block;overflow:hidden;box-sizing:bord
   font-size: 1.5rem;
 }
 
-.tree li:hover {
-  cursor: pointer;
-}
-
 .tree ul li:before {
   content: "";
   display: block;
@@ -39372,6 +39368,9 @@ html.os-html,html.os-html>.os-host{display:block;overflow:hidden;box-sizing:bord
   margin: 0px 0px 0px 0px;
   padding: 0px 0px 0px 0px;
   outline: 0;
-  cursor: pointer;
+}
+
+#asset-image-preview {
+  width: 100%;
 }
 

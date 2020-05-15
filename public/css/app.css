@@ -89,10 +89,6 @@
   font-size: 1.5rem;
 }
 
-.tree li:hover {
-  cursor: pointer;
-}
-
 .tree ul li:before {
   content: "";
   display: block;
@@ -132,6 +128,9 @@
   margin: 0px 0px 0px 0px;
   padding: 0px 0px 0px 0px;
   outline: 0;
-  cursor: pointer;
+}
+
+#asset-image-preview {
+  width: 100%;
 }
 

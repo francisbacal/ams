@@ -98,13 +98,21 @@ class CategoryController extends Controller
 
     }
 
+    /*-----------------------
+    | Category View
+    |----------------------*/
+
     public function manageCategory()
     {
-        $categories = Category::where('parent_id', '=', null)->get();
-        $allCategories = Category::pluck('name', 'id')->all();
+        $categories = Category::all();
+        $selectCategories = Category::all()->pluck('name', 'id');
 
-        return view('categories.categoryTreeview', compact('categories', 'allCategories'));
+        return view('categories.categoryTreeview')->with('categories', $categories)->with('selectCategories', $selectCategories);
     }
+
+    /*-----------------------
+    | ADD Category
+    |----------------------*/
 
     public function addCategory(Request $request)
     {
@@ -120,6 +128,10 @@ class CategoryController extends Controller
         return back()->with('success', 'New Category added successfully.');
     }
 
+    /*-----------------------
+    | SOFTDELETED
+    |----------------------*/
+
     public function softDeleted(Request $request)
     {
         abort_if(Gate::denies('category-create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -129,6 +141,10 @@ class CategoryController extends Controller
 
         return view('categories.categorysoft')->with('categories', $categories);
     }
+
+    /*-----------------------
+    | RESTORE
+    |----------------------*/
     public function restore($category)
     {
 
@@ -137,6 +153,11 @@ class CategoryController extends Controller
         Category::withTrashed()->find($category)->restore();
         return back()->with('success', 'Restored successfully.');
     }
+
+    /*-----------------------
+    | RESTORE ALL
+    |----------------------*/
+
     public function restoreAll()
     {
 

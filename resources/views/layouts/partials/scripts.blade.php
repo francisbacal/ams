@@ -28,6 +28,9 @@
 {{-- SWAL ALERT 2 --}}
 <script src="{{  asset('js/sweetalert2.js') }}"></script>
 
+{{-- CUSTOM --}}
+<script src="{{  asset('js/app.js') }}"></script>
+
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
