@@ -1,5 +1,6 @@
 <?php
 
+use App\Asset;
 use Illuminate\Database\Seeder;
 
 class AssetSeeder extends Seeder
@@ -11,6 +12,7 @@ class AssetSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // Asset::truncate();
+        factory(Asset::class, 50)->create();
     }
 }

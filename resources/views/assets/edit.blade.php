@@ -97,10 +97,10 @@
                         <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
 
                             <img src="{{ $asset->image }}" style="height; 100%;  width: 100%;" class="my-3"
-                                id="imageUpload">
+                                id="editasset-image-preview">
                             <div class="form-group">
                                 <label for="image" class="mt-2">Choose Image</label>
-                                <input type="file" name="image" id="imageUpload" class="form-control-file">
+                                <input type="file" name="image" id="imageEditUpload" class=" form-control-file">
                             </div>
                             <span class="text-danger">{{ $errors->first('image') }}</span>
                         </div>

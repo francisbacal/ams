@@ -14,4 +14,10 @@ class Category extends Model
 | ELOQUENT - RELATIONSHIP
 |-------------------------------*/
 
+    public function categoryStocks()
+    {
+
+        return $this->belongsTo('App\CategoryStock');
+
+    }
 }

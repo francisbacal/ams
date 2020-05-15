@@ -34,10 +34,19 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+
                     {{--====== ASSETS CATEGORIES ======--}}
+
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
+                            <a href="{{ route('assets.index') }}"
+                                class="nav-link {{ (Request::url() == route('assets.index')) ? "active" : "" }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>All Assets</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Available</p>
                             </a>

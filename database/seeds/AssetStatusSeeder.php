@@ -16,7 +16,10 @@ class AssetStatusSeeder extends Seeder
                 "name" => "Available",
             ],
             [
-                "name" => "Deployed",
+                "name" => "Allocated",
+            ],
+            [
+                "name" => "Reserved",
             ],
             [
                 "name" => "For Diagnosis",

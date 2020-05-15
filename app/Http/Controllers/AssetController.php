@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Asset;
 use App\AssetStatus;
 use App\Category;
-use App\Stock;
-use Carbon\Carbon;
+use App\CategoryStock;
 use Gate;
 use Illuminate\Http\Request;
 use Storage;
 use Str;
 use Symfony\Component\HttpFoundation\Response;
+use Carbon\Carbon;
 
 class AssetController extends Controller
 {
@@ -22,6 +22,12 @@ class AssetController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('asset-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // $stock = Asset::where(['category_id' => 1, 'asset_status_id' => 1])->pluck('name');
+        // $allstock = Asset::where('category_id', 1)->pluck('name');
+        // dd(count($allstock));
+
         $assets = Asset::all();
         return view('assets.index')->with('assets', $assets);
     }
@@ -36,11 +42,10 @@ class AssetController extends Controller
         abort_if(Gate::denies('asset-create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $asset_statuses = AssetStatus::all();
-        $stocks = Stock::all(); //to be refactored;
         $categories = Category::all();
         $serial = strtoupper(Str::random(9));
 
-        return view('assets.create')->with(['asset_statuses' => $asset_statuses, 'stocks' => $stocks, 'categories' => $categories, 'serial' => $serial]);
+        return view('assets.create')->with(['asset_statuses' => $asset_statuses, 'categories' => $categories, 'serial' => $serial]);
     }
 
     /**
@@ -56,7 +61,7 @@ class AssetController extends Controller
         $date = Carbon::now()->format('Ymd');
 
         $validatedData = $request->validate([
-            'name' => 'required|unique:assets,name|string|max:100',
+            'name' => 'required|string|max:100',
             'price' => 'required|numeric',
             'serial' => 'required|string',
             'description' => 'required|string',
@@ -67,7 +72,6 @@ class AssetController extends Controller
         $code = "AMS-" . $request->serial . $date;
 
         $validatedData['code'] = $code;
-        // dd($validatedData);
 
         $image_path = $request->file("image")->store('public/assets');
 
@@ -75,6 +79,27 @@ class AssetController extends Controller
         $asset->image = Storage::url($image_path);
 
         $asset->save();
+
+        /*===================
+        | ADD NEW STOCK
+        ===================*/
+
+        $category_stock = CategoryStock::where('category_id', $request->category_id)->get()->first();
+
+        if ($category_stock === null) {
+
+            $category_stock = new CategoryStock();
+            $category_stock->category_id = $request->category_id;
+            $category_stock->available = 1;
+            $category_stock->total = 1;
+
+        } else {
+
+            $category_stock->available += 1;
+            $category_stock->total += 1;
+        }
+
+        $category_stock->save();
 
         return (redirect(route('assets.index'))->with('success', "$asset->name successfully added"));
 
@@ -88,6 +113,7 @@ class AssetController extends Controller
      */
     public function show(Asset $asset)
     {
+        abort_if(Gate::denies('asset-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return view('assets.show')->with('asset', $asset);
     }
 

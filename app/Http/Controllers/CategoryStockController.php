@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Stock;
+use App\CategoryStock;
 use Illuminate\Http\Request;
 
-class StockController extends Controller
+class CategoryStockController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class StockController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Stock  $stock
+     * @param  \App\CategoryStock  $categoryStock
      * @return \Illuminate\Http\Response
      */
-    public function show(Stock $stock)
+    public function show(CategoryStock $categoryStock)
     {
         //
     }
@@ -52,10 +52,10 @@ class StockController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Stock  $stock
+     * @param  \App\CategoryStock  $categoryStock
      * @return \Illuminate\Http\Response
      */
-    public function edit(Stock $stock)
+    public function edit(CategoryStock $categoryStock)
     {
         //
     }
@@ -64,10 +64,10 @@ class StockController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Stock  $stock
+     * @param  \App\CategoryStock  $categoryStock
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Stock $stock)
+    public function update(Request $request, CategoryStock $categoryStock)
     {
         //
     }
@@ -75,10 +75,10 @@ class StockController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Stock  $stock
+     * @param  \App\CategoryStock  $categoryStock
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Stock $stock)
+    public function destroy(CategoryStock $categoryStock)
     {
         //
     }
