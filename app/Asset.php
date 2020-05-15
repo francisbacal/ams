@@ -24,6 +24,16 @@ class Asset extends Model
         'deleted_at',
     ];
 
+    public function category()
+    {
+        return $this->belongsTo('App\Category')->withTrashed();
+    }
+    public function status()
+    {
+        return $this->belongsTo('App\AssetStatus', 'asset_status_id');
+
+    }
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');

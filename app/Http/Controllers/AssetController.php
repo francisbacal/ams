@@ -22,8 +22,8 @@ class AssetController extends Controller
      */
     public function index()
     {
-        
-        return view('assets.index');
+        $assets = Asset::all();
+        return view('assets.index')->with('assets', $assets);
     }
 
     /**
@@ -76,7 +76,7 @@ class AssetController extends Controller
 
         $asset->save();
 
-        return (redirect(route('assets.index'))->with('message', "$asset->name successfully added"));
+        return (redirect(route('assets.index'))->with('success', "$asset->name successfully added"));
 
     }
 
@@ -88,7 +88,7 @@ class AssetController extends Controller
      */
     public function show(Asset $asset)
     {
-        //
+        return view('assets.show')->with('asset', $asset);
     }
 
     /**
@@ -99,7 +99,11 @@ class AssetController extends Controller
      */
     public function edit(Asset $asset)
     {
-        //
+        abort_if(Gate::denies('asset-edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $asset_statuses = AssetStatus::all();
+        $categories = Category::all();
+
+        return view('assets.edit')->with(['asset' => $asset, 'categories' => $categories, 'asset_statuses' => $asset_statuses]);
     }
 
     /**
@@ -111,7 +115,8 @@ class AssetController extends Controller
      */
     public function update(Request $request, Asset $asset)
     {
-        //
+        abort_if(Gate::denies('asset-edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        return "HELLO";
     }
 
     /**
