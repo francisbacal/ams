@@ -1,13 +1,9 @@
 require('./bootstrap');
 
-//TOOLTIP
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-});
-
 
 //TREE VIEW CATEGORY
+
+
 
 $.fn.extend({
     treed: function (o) {
@@ -162,3 +158,7 @@ $('.deleteAssetBtn').click(function (e) {
     })
 
 });
+
+/*=============================================
+| REQUISITION SECTION JS
+|============================================*/

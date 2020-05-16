@@ -16,4 +16,9 @@
     {{-- swal bootstrap --}}
     <link href="{{  asset('css/bootstrap-4.min.css') }}" rel="stylesheet">
 
+    {{-- Select 2 bootstrap --}}
+    <link rel="stylesheet" href="{{  asset('plugins/select2/css/select2.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 </head>

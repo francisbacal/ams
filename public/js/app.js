@@ -37326,12 +37326,8 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //TOOLTIP
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //TREE VIEW CATEGORY
 
-
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip();
-}); //TREE VIEW CATEGORY
 
 $.fn.extend({
   treed: function treed(o) {
@@ -37471,6 +37467,9 @@ $('.deleteAssetBtn').click(function (e) {
     }
   });
 });
+/*=============================================
+| REQUISITION SECTION JS
+|============================================*/
 
 /***/ }),
 

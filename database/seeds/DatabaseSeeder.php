@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             AssetStatusSeeder::class,
             AssetSeeder::class,
             CategoryStockSeeder::class,
+            RequisitionStatusSeeder::class,
 
         ]);
     }

@@ -58,7 +58,13 @@ Route::post('/assets-trashed/restoreall', 'AssetController@restoreAll')
     ->name('assets.restoreall')->middleware("role:admin");
 
 /*-----------------------
+| REQUESTS
+|----------------------*/
+
+Route::resource('requisitions', 'RequisitionController');
+
+/*-----------------------
 | PERMISSIONS
 |----------------------*/
 
-Route::resource('permissions', 'PermissionController');
+Route::resource('permissions', 'PermissionController')->middleware('role:admin');
