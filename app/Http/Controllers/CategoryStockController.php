@@ -2,11 +2,145 @@
 
 namespace App\Http\Controllers;
 
+use App\Asset;
+use App\Category;
 use App\CategoryStock;
 use Illuminate\Http\Request;
 
 class CategoryStockController extends Controller
 {
+    public function updateOldCategoryStock($asset)
+    {
+
+        $categoryStock = CategoryStock::where('category_id', $asset->category_id)->get()->first();
+
+        $this->updateCategoryStock($asset, $categoryStock);
+    }
+
+    public function updateNewCategoryStock($request)
+    {
+        $asset = Asset::where('category_id', $request->old_category_id)->get()->first();
+
+        $oldCategoryStock = CategoryStock::where('category_id', $asset->category_id)->get()->first();
+        $this->updateCategoryStock($asset, $oldCategoryStock);
+
+        $newCategoryStock = CategoryStock::where('category_id', $request->category_id)->get()->first();
+        $this->updateCategoryStock($request, $newCategoryStock);
+
+    }
+
+    public function updateCategoryStockAfterDelete($asset)
+    {
+        $categoryStock = CategoryStock::where('category_id', $asset->category_id)->get()->first();
+        $categoryStock->total -= 1;
+
+        switch ($asset->asset_status_id) {
+
+            case '1':
+                $categoryStock->available -= 1;
+                break;
+
+            case '2':
+                $categoryStock->allocated -= 1;
+                break;
+
+            case '3':
+                $categoryStock->reserved -= 1;
+                break;
+
+            case '4':
+                $categoryStock->for_diagnosis -= 1;
+                break;
+
+            case '5':
+                $categoryStock->for_repair -= 1;
+                break;
+        };
+        $categoryStock->update();
+    }
+
+    public function updateCategoryStockAfterRestore($asset)
+    {
+
+        $asset_deleted = Asset::withTrashed()->find($asset);
+        $categoryStock = CategoryStock::where('category_id', $asset_deleted->category_id)->first();
+        $assets = Asset::where('category_id', $asset_deleted->category_id)->get();
+
+        $categoryStock->total = count($assets);
+        $categoryStock->available = 0;
+        $categoryStock->allocated = 0;
+        $categoryStock->reserved = 0;
+        $categoryStock->for_diagnosis = 0;
+        $categoryStock->for_repair = 0;
+
+        foreach ($assets as $asset) {
+
+            switch ($asset->asset_status_id) {
+                case 1:
+                    $categoryStock->available++;
+                    break;
+
+                case 2:
+                    $categoryStock->allocated++;
+                    break;
+
+                case 3:
+                    $categoryStock->reserved++;
+                    break;
+
+                case 4:
+                    $categoryStock->for_diagnosis++;
+                    break;
+
+                case 5:
+                    $categoryStock->for_repair++;
+                    break;
+
+            }
+        }
+
+        $categoryStock->update();
+    }
+
+    public function updateCategoryStock($asset, $categoryStock)
+    {
+        $assets = Asset::where('category_id', $asset->category_id)->get();
+
+        $categoryStock->total = count($assets);
+        $categoryStock->available = 0;
+        $categoryStock->allocated = 0;
+        $categoryStock->reserved = 0;
+        $categoryStock->for_diagnosis = 0;
+        $categoryStock->for_repair = 0;
+
+        foreach ($assets as $asset) {
+
+            switch ($asset->asset_status_id) {
+                case 1:
+                    $categoryStock->available++;
+                    break;
+
+                case 2:
+                    $categoryStock->allocated++;
+                    break;
+
+                case 3:
+                    $categoryStock->reserved++;
+                    break;
+
+                case 4:
+                    $categoryStock->for_diagnosis++;
+                    break;
+
+                case 5:
+                    $categoryStock->for_repair++;
+                    break;
+
+            }
+        }
+        $categoryStock->update();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -84,124 +218,4 @@ class CategoryStockController extends Controller
         //
     }
 
-    public function updateOldCategoryStock($request, $asset)
-    {
-
-        $categoryStock = CategoryStock::where('category_id', $asset->category_id)->get()->first();
-
-        if ($asset->asset_status_id != $request->asset_status_id) {
-
-            // add to new status
-            switch ($request->asset_status_id) {
-
-                case '1':
-                    $categoryStock->available += 1;
-                    break;
-
-                case '2':
-                    $categoryStock->allocated += 1;
-                    break;
-
-                case '3':
-                    $categoryStock->reserved += 1;
-                    break;
-
-                case '4':
-                    $categoryStock->for_diagnosis += 1;
-                    break;
-
-                case '5':
-                    $categoryStock->for_repair += 1;
-                    break;
-            };
-
-            // deduct from old status
-            switch ($asset->asset_status_id) {
-
-                case 1:
-                    $categoryStock->available -= 1;
-                    break;
-
-                case 2:
-                    $categoryStock->allocated -= 1;
-                    break;
-
-                case 3:
-                    $categoryStock->reserved -= 1;
-                    break;
-
-                case 4:
-                    $categoryStock->for_diagnosis -= 1;
-                    break;
-
-                case 5:
-                    $categoryStock->for_repair -= 1;
-                    break;
-            }
-        }
-        $categoryStock->update();
-    }
-    public function updateNewCategoryStock($request, $asset)
-    {
-        $categoryStock = CategoryStock::where('category_id', $request->category_id)->get()->first();
-
-        if ($categoryStock === null) {
-
-            $categoryStock = new CategoryStock();
-            $categoryStock->category_id = $request->category_id;
-            $categoryStock->total += 1;
-
-            switch ($request->asset_status_id) {
-
-                case '1':
-                    $categoryStock->available += 1;
-                    break;
-
-                case '2':
-                    $categoryStock->allocated += 1;
-                    break;
-
-                case '3':
-                    $categoryStock->reserved += 1;
-                    break;
-
-                case '4':
-                    $categoryStock->for_diagnosis += 1;
-                    break;
-
-                case '5':
-                    $categoryStock->for_repair += 1;
-                    break;
-            };
-
-        } else {
-
-            switch ($request->asset_status_id) {
-
-                case '1':
-                    $categoryStock->available += 1;
-                    break;
-
-                case '2':
-                    $categoryStock->allocated += 1;
-                    break;
-
-                case '3':
-                    $categoryStock->reserved += 1;
-                    break;
-
-                case '4':
-                    $categoryStock->for_diagnosis += 1;
-                    break;
-
-                case '5':
-                    $categoryStock->for_repair += 1;
-                    break;
-            };
-
-            $categoryStock->total += 1;
-        }
-
-        $categoryStock->save();
-    }
 }

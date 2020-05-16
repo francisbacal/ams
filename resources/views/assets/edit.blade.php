@@ -63,8 +63,8 @@
                                             <span class="text-danger">{{ $errors->first('description') }}</span>
                                         </div>
                                         <div class="form-group">
-                                            {{-- <input type="hidden" name="old_category_id"
-                                                value="{{ $asset->category_id }}"> --}}
+                                            <input type="hidden" name="old_category_id"
+                                                value="{{ $asset->category_id }}">
                                             <label for="inputCategory">Category</label>
                                             <select class="form-control custom-select" name="category_id">
                                                 @foreach ($categories as $category)

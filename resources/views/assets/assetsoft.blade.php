@@ -16,7 +16,7 @@
 
                     <!--====== <Restore All> ======-->
 
-                    {!! Form::open(['action'=>'AssetController@restoreAll', 'method' => 'post', 'id' =>
+                    {{-- {!! Form::open(['action'=>'AssetController@restoreAll', 'method' => 'post', 'id' =>
                     'assetRestoreAllForm', 'class'=>'mt-2']) !!}
 
                     <div class="card-tools d-flex justify-content-end align-items-center form-group">
@@ -25,7 +25,7 @@
                         </button>
                     </div>
 
-                    {!! Form::close() !!}
+                    {!! Form::close() !!} --}}
 
                     <!--====== </Restore All> ======-->
 

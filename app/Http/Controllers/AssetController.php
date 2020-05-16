@@ -142,24 +142,8 @@ class AssetController extends Controller
     {
         abort_if(Gate::denies('asset-edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        /*===================
-        | UPDATE STOCK
-        ===================*/
-
-        // CHECK IF CATEGORY IS SAME WITH CURRENT AND UPDATE STOCKS ACCORDINGLY //
-
-        if ($request->category_id == $asset->category_id) {
-
-            app(CategoryStockController::class)->updateOldCategoryStock($request, $asset);
-
-        } else {
-
-            app(CategoryStockController::class)->updateNewCategoryStock($request, $asset);
-        }
-
-        // dd('hello');
-
         //UPDATE ASSET ITEM
+
         $validatedData = $request->validate([
             'name' => 'required|string|max:100',
             'price' => 'required|numeric',
@@ -179,6 +163,23 @@ class AssetController extends Controller
 
         $asset->save();
 
+        // dd($request->old_category_id == $asset->category_id);
+
+        /*===================
+        | UPDATE STOCK
+        ===================*/
+
+        // CHECK IF CATEGORY IS SAME WITH CURRENT AND UPDATE STOCKS ACCORDINGLY //
+
+        if ($request->old_category_id == $asset->category_id) {
+
+            app(CategoryStockController::class)->updateOldCategoryStock($request);
+
+        } else {
+
+            app(CategoryStockController::class)->updateNewCategoryStock($request);
+        }
+
         return redirect()->route('assets.show', ['asset' => $asset->id])->with('success', "$asset->name is successfully edited");
 
     }
@@ -192,6 +193,9 @@ class AssetController extends Controller
     public function destroy(Asset $asset)
     {
         abort_if(Gate::denies('asset-destroy'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // UPDATE STOCK
+        app(CategoryStockController::class)->updateCategoryStockAfterDelete($asset);
 
         $asset->delete();
 
@@ -221,6 +225,8 @@ class AssetController extends Controller
         abort_if(Gate::denies('asset-edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         Asset::withTrashed()->find($asset)->restore();
+        app(CategoryStockController::class)->updateCategoryStockAfterRestore($asset);
+
         return back()->with('success', 'Restored successfully.');
     }
 
