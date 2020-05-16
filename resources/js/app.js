@@ -162,3 +162,9 @@ $('.deleteAssetBtn').click(function (e) {
 /*=============================================
 | REQUISITION SECTION JS
 |============================================*/
+
+
+// $('#submitRequest').click(function (e) {
+//     e.preventDefault();
+//     console.log($('#assetSelect').val())
+// });

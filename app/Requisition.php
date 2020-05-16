@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Requisition extends Model
 {
-    protected $fillable = ['code', 'requested_date', 'notes', 'requisition_status_id', 'user_id'];
+    protected $fillable = ['code', 'requested_date', 'notes', 'requisition_status_id', 'user_id', 'created_at', 'updated_at'];
 
     public function assets()
     {
@@ -18,6 +18,6 @@ class Requisition extends Model
     }
     public function status()
     {
-        return $this->belongsTo('App\RequisitionStatus');
+        return $this->belongsTo('App\RequisitionStatus', 'requisition_status_id');
     }
 }

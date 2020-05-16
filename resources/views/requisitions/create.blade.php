@@ -22,58 +22,62 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="reservation">Category:</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fas fa-archive"></i>
-                                </span>
-                            </div>
-                            <select class="form-control custom-select" name="category_id">
-                                @foreach ($categories as $category)
+                    <form action="{{ route('requisitions.store') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="reservation">Category:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-archive"></i>
+                                    </span>
+                                </div>
+                                <select class="form-control custom-select" name="category_id">
+                                    @foreach ($categories as $category)
 
-                                <option value="{{ $category->id }}">
-                                    {{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                            <span class="text-danger">{{ $errors->first('category_id') }}</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputCategory">Asset:</label>
-                        <div class="select2-blue">
-                            <select class="select2" multiple="multiple" data-dropdown-css-class="select2-blue"
-                                data-placeholder="Select Asset" style="width: 100%;">
-                                @foreach ($assets as $asset)
-                                <option value="{{ $asset->id }}">{{ $asset->name }} - {{ $asset->code }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <span class="text-danger">{{ $errors->first('asset_id') }}</span>
-                        {{-- </div> --}}
-                    </div>
-                    <div class="form-group">
-                        <label for="reservation">Date Needed:</label>
-
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="far fa-calendar-alt"></i>
-                                </span>
+                                    <option value="{{ $category->id }}">
+                                        {{ $category->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <input type="text" class="form-control float-right" name="requested_date" id="reservation">
-                            <span class="text-danger">{{ $errors->first('requested_date') }}</span>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="requestNote">Notes:</label>
-                        <textarea id="requestNote" name="notes" class="form-control" rows="4"></textarea>
-                        <span class="text-danger">{{ $errors->first('notes') }}</span>
-                    </div>
-                    <div class="d-flex justify-content-end p-0">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+                        <div class="form-group">
+                            <label for="inputCategory">Asset:</label>
+                            <div class="select2-blue">
+                                <select name="assets[]" class="select2" multiple="multiple"
+                                    data-dropdown-css-class="select2-blue" data-placeholder="Select Asset"
+                                    style="width: 100%;" id="assetSelect">
+                                    @foreach ($assets as $asset)
+                                    <option value="{{ $asset->id }}">{{ $asset->name }} - {{ $asset->code }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <span class="text-danger">{{ $errors->first('assets') }}</span>
+                            {{-- </div> --}}
+                        </div>
+                        <div class="form-group">
+                            <label for="reservation">Date Needed:</label>
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control float-right" name="requested_date"
+                                    id="reservation">
+                                <span class="text-danger">{{ $errors->first('requested_date') }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="requestNote">Notes:</label>
+                            <textarea id="requestNote" name="notes" class="form-control" rows="4"></textarea>
+                            <span class="text-danger">{{ $errors->first('notes') }}</span>
+                        </div>
+                        <div class="d-flex justify-content-end p-0">
+                            <button id="submitRequest" type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
                 </div>
         </section>
     </div>

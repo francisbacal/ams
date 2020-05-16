@@ -8,22 +8,43 @@
 </div>
 @endif
 <div class="row justify-content-center">
-    <div class="col-xl-4 col-lg-6 col-md-6">
+    <div class="col-xl-12">
         <section class="content">
 
-            <!-- Default box -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Request Form</h3>
+                    <h3 class="card-title">Requests List</h3>
+
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                             title="Collapse">
                             <i class="fas fa-minus"></i></button>
                     </div>
                 </div>
-                <div class="col m-3">
-                    <a href="{{ route('requisitions.create') }}" class="btn btn-primary">Request an asset</a>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-striped projects">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    Request Code
+                                </th>
+                                <th class="text-center">
+                                    Date Needed
+                                </th>
+                                <th class="text-center" style="width: 8%">
+                                    Status
+                                </th>
+                                <th class="text-center">
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @include('requisitions.partials.request')
+                        </tbody>
+                    </table>
                 </div>
+                <!-- /.card-body -->
             </div>
         </section>
     </div>

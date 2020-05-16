@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Asset;
 use App\Category;
 use App\Requisition;
+use Auth;
 use Illuminate\Http\Request;
+use Str;
 
 class RequisitionController extends Controller
 {
@@ -16,8 +18,8 @@ class RequisitionController extends Controller
      */
     public function index()
     {
-
-        return view('requisitions.index');
+        $requisitions = Requisition::all();
+        return view('requisitions.index')->with('requisitions', $requisitions);
     }
 
     /**
@@ -41,7 +43,29 @@ class RequisitionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validatedData = $request->validate([
+            'requested_date' => 'required|string|max:30',
+            'notes' => 'required|string',
+            'assets' => 'required',
+            'requested_date' => 'required',
+        ]);
+
+        $user_id = Auth::user()->id;
+        $code = "REQ-" . strtoupper(Str::random(6));
+
+        $requisition = new Requisition($validatedData);
+        $requisition->code = $code;
+        $requisition->user_id = $user_id;
+        $requisition->save();
+
+        $assetModels = [];
+        foreach ($request->assets as $asset) {
+            $assetModels[] = Asset::find($asset);
+        }
+        $requisition->assets()->saveMany($assetModels);
+
+        return redirect()->route('requisitions.index');
     }
 
     /**
