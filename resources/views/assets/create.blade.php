@@ -62,56 +62,56 @@
                             </select>
                             <span class="text-danger">{{ $errors->first('category_id') }}</span>
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="inputStatus">Status</label>
                             <select class="form-control custom-select" name="asset_status_id">
                                 @foreach ($asset_statuses as $asset_status)
 
                                 <option value="{{ $asset_status->id }}">{{ $asset_status->name }}</option>
 
-                                @endforeach
-                            </select>
-                            <span class="text-danger">{{ $errors->first('asset_status_id') }}</span>
-                        </div>
-                    </div>
+                        @endforeach
+                        </select>
+                        <span class="text-danger">{{ $errors->first('asset_status_id') }}</span>
+                    </div> --}}
                 </div>
         </div>
-        <div class="col-md-6">
-            <div class="card card-secondary">
-                <div class="card-header">
-                    <h3 class="card-title">Image</h3>
+    </div>
+    <div class="col-md-6">
+        <div class="card card-secondary">
+            <div class="card-header">
+                <h3 class="card-title">Image</h3>
 
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
-                            title="Collapse">
-                            <i class="fas fa-minus"></i></button>
-                    </div>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                        <i class="fas fa-minus"></i></button>
                 </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="image" class="mt-2">Choose Image</label>
-                        <input type="file" name="image" id="imageUpload" class="form-control-file">
-                    </div>
-                    <div class="row my-2 justify-content-center">
-                        <div class="col-auto">
-                            <img id="asset-image-preview" class="d-none" src="" alt="product image">
-                        </div>
-                    </div>
-                    <span class="text-danger">{{ $errors->first('image') }}</span>
-                </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="image" class="mt-2">Choose Image</label>
+                    <input type="file" name="image" id="imageUpload" class="form-control-file">
+                </div>
+                <div class="row my-2 justify-content-center">
+                    <div class="col-auto">
+                        <img id="asset-image-preview" class="d-none" src="" alt="product image">
+                    </div>
+                </div>
+                <span class="text-danger">{{ $errors->first('image') }}</span>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
 
-        </div>
     </div>
-    <div class="row justify-content-end pb-5">
-        <div class="col-auto">
-            <a href="#" class="text-danger mr-2">Cancel</a>
-            <button type="submit" class="btn btn-primary">Add Asset</button>
-        </div>
+</div>
+<div class="row justify-content-end pb-5">
+    <div class="col-auto">
+        <a href="#" class="text-danger mr-2">Cancel</a>
+        <button type="submit" class="btn btn-primary">Add Asset</button>
     </div>
-    </form>
+</div>
+</form>
 </div>
 
 @endsection

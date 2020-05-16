@@ -6,12 +6,12 @@ use App\Asset;
 use App\AssetStatus;
 use App\Category;
 use App\CategoryStock;
+use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
 use Storage;
 use Str;
 use Symfony\Component\HttpFoundation\Response;
-use Carbon\Carbon;
 
 class AssetController extends Controller
 {
@@ -41,11 +41,11 @@ class AssetController extends Controller
     {
         abort_if(Gate::denies('asset-create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $asset_statuses = AssetStatus::all();
+        // $asset_statuses = AssetStatus::all();
         $categories = Category::all();
         $serial = strtoupper(Str::random(9));
 
-        return view('assets.create')->with(['asset_statuses' => $asset_statuses, 'categories' => $categories, 'serial' => $serial]);
+        return view('assets.create')->with(['categories' => $categories, 'serial' => $serial]);
     }
 
     /**
@@ -67,7 +67,6 @@ class AssetController extends Controller
             'description' => 'required|string',
             'image' => 'required|image|max:2000',
             'category_id' => 'required|string',
-            'asset_status_id' => 'required',
         ]);
         $code = "AMS-" . $request->serial . $date;
 
@@ -143,6 +142,24 @@ class AssetController extends Controller
     {
         abort_if(Gate::denies('asset-edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        /*===================
+        | UPDATE STOCK
+        ===================*/
+
+        // CHECK IF CATEGORY IS SAME WITH CURRENT AND UPDATE STOCKS ACCORDINGLY //
+
+        if ($request->category_id == $asset->category_id) {
+
+            app(CategoryStockController::class)->updateOldCategoryStock($request, $asset);
+
+        } else {
+
+            app(CategoryStockController::class)->updateNewCategoryStock($request, $asset);
+        }
+
+        // dd('hello');
+
+        //UPDATE ASSET ITEM
         $validatedData = $request->validate([
             'name' => 'required|string|max:100',
             'price' => 'required|numeric',
