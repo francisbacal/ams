@@ -8,24 +8,28 @@
         {{ $requisition->requested_date }}
     </td>
     <td class="text-center">
-        @if ($requisition->requisition_status_id === 1 )
-
-        <span class="badge badge-success">{{ $requisition->status->name }}</span>
-
-        @else
-
-        <span class="badge badge-danger">{{ $requisition->status->name }}</span>
-
-        @endif
+        <span id="requestStatusIndex{{ $requisition->id }}" class="badge 
+            @if ($requisition->requisition_status_id == 1)
+                badge-warning
+            @elseif ($requisition->requisition_status_id == 2)
+                badge-info
+            @elseif ($requisition->requisition_status_id == 3)
+                badge-success
+            @else
+                badge-danger
+            @endif
+        ">{{ $requisition->status->name }}</span>
     </td>
     <td>
         <div class="row">
             <div class="col-auto mx-auto">
-                <a class="btn btn-primary btn-sm my-1" href="{{ '__ID__'  }}">
+                <button type="button" class="btn btn-primary btn-sm my-1 showRequestModal"
+                    data-id={{ $requisition->id }} data-code={{ $requisition->code }}
+                    data-status="{{ $requisition->status->name }}">
                     <i class="fas fa-folder">
                     </i>
                     View
-                </a>
+                </button>
                 <a class="btn btn-info btn-sm my-1" href="{{ '__ID__' }}">
                     <i class="fas fa-pencil-alt">
                     </i>
@@ -43,8 +47,8 @@
                 </form>
             </div>
         </div>
-
     </td>
 </tr>
+
 
 @endforeach

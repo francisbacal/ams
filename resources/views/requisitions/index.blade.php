@@ -49,6 +49,8 @@
         </section>
     </div>
 </div>
+@include('requisitions.partials.modalshow')
+
 
 
 @endsection

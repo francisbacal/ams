@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Asset;
 use App\Category;
 use App\Requisition;
+use App\RequisitionStatus;
 use Auth;
 use Illuminate\Http\Request;
 use Str;
@@ -65,7 +66,7 @@ class RequisitionController extends Controller
         }
         $requisition->assets()->saveMany($assetModels);
 
-        return redirect()->route('requisitions.index');
+        return redirect()->route('requisitions.index')->with('success', 'Request has been sent for verification and approval.');
     }
 
     /**
@@ -76,7 +77,7 @@ class RequisitionController extends Controller
      */
     public function show(Requisition $requisition)
     {
-        //
+        return view('requisitions.partials.content.modalcontent')->with(['requisition' => $requisition, 'requisition_statuses' => RequisitionStatus::all()])->render();
     }
 
     /**
@@ -99,7 +100,15 @@ class RequisitionController extends Controller
      */
     public function update(Request $request, Requisition $requisition)
     {
-        //
+        $validatedData = $request->validate([
+            'requisition_status_id' => 'required|numeric',
+        ]);
+
+        $requisition->requisition_status_id = $request->requisition_status_id;
+
+        $requisition->update($validatedData);
+
+        return response()->json(['status' => $requisition->status->name, 'status_id' => $requisition->requisition_status_id]);
     }
 
     /**

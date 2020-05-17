@@ -163,8 +163,75 @@ $('.deleteAssetBtn').click(function (e) {
 | REQUISITION SECTION JS
 |============================================*/
 
+$('.showRequestModal').click(function (e) {
+    e.preventDefault();
 
-// $('#submitRequest').click(function (e) {
-//     e.preventDefault();
-//     console.log($('#assetSelect').val())
-// });
+    const requestId = $(this).data('id');
+    const requestCode = $(this).data('code');
+    const requestStatus = $(this).data('status');
+    const modal = $('#requestShowModal');
+
+    $.get('requisitions/' + requestId, function (data) {
+        modal.modal();
+        modal.on('shown.bs.modal', function () {
+            modal.find('.modal-title').text("Request Code: " + requestCode)
+            modal.find('.modal-body').html(data);
+            $('#requestLoader').hide();
+
+            $('.updateRequestStatusBtn').click(function (e) {
+                e.preventDefault();
+                $('#requestLoader').show();
+                url = "requisitions/" + $(this).data('id');
+                status = $('#editRequestStatus').val();
+                csrf = $('meta[name=csrf-token]').attr('content');
+
+                $.ajax({
+                    url: url,
+                    type: "PUT",
+                    headers: {
+                        'X-CSRF-TOKEN': csrf
+                    },
+                    data: {
+                        'requisition_status_id': status
+                    },
+                    success: function (response) {
+                        status = response.status;
+                        id = response.status_id;
+                        indexStatus = "#requestStatusIndex" + requestId;
+                        $('#requestStatus').removeClass();
+                        $(indexStatus).removeClass();
+
+                        console.log($(indexStatus));
+
+                        switch (id) {
+                            case "1":
+                                $('#requestStatus').addClass("ml-2 badge badge-warning");
+                                $(indexStatus).addClass("badge badge-warning");
+                                break;
+                            case "2":
+                                $('#requestStatus').addClass("ml-2 badge badge-info");
+                                $(indexStatus).addClass("badge badge-info");
+                                break;
+                            case "3":
+                                $('#requestStatus').addClass("ml-2 badge badge-success");
+                                $(indexStatus).addClass("badge badge-success");
+                                break;
+                            case "4":
+                                $('#requestStatus').addClass("ml-2 badge badge-danger");
+                                $(indexStatus).addClass("badge badge-danger");
+                                break;
+                        }
+
+                        $('#requestStatus').text(status);
+                        $(indexStatus).text(status);
+
+                        $('#requestLoader').hide();
+                    }
+                })
+            })
+            modal.on('hidden.bs.modal', function () {
+                modal.find('.modal-body').html('');
+            })
+        })
+    })
+})
