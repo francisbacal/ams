@@ -8,7 +8,7 @@
 </div>
 @endif
 <div class="row justify-content-center">
-    <div class="col-xl-4 col-lg-6 col-md-6">
+    <div class="col-xl-6 col-lg-8 col-md-10">
         <section class="content">
 
             <!-- Default box -->
@@ -32,7 +32,8 @@
                                         <i class="fas fa-archive"></i>
                                     </span>
                                 </div>
-                                <select class="form-control custom-select" name="category_id">
+                                <select class="form-control custom-select" name="category_id"
+                                    id="requestCategorySelect">
                                     @foreach ($categories as $category)
 
                                     <option value="{{ $category->id }}">

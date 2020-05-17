@@ -25,6 +25,10 @@ class CategoryStockController extends Controller
         $this->updateCategoryStock($asset, $oldCategoryStock);
 
         $newCategoryStock = CategoryStock::where('category_id', $request->category_id)->get()->first();
+        if ($newCategoryStock === null) {
+            $newCategoryStock = new CategoryStock();
+            $newCategoryStock->category_id = $request->category_id;
+        }
         $this->updateCategoryStock($request, $newCategoryStock);
 
     }

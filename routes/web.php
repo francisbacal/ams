@@ -21,13 +21,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 /*-----------------------
 | USERS
 |----------------------*/
-
-
-
 
 /*-----------------------
 | CATEGORIES
@@ -69,6 +65,7 @@ Route::post('/assets-trashed/restoreall', 'AssetController@restoreAll')
 | REQUESTS
 |----------------------*/
 
+Route::get('/requisitions-category', 'RequisitionController@updateCreate');
 Route::resource('requisitions', 'RequisitionController');
 
 /*-----------------------

@@ -163,6 +163,35 @@ $('.deleteAssetBtn').click(function (e) {
 | REQUISITION SECTION JS
 |============================================*/
 
+$('#requestCategorySelect').change(function () {
+    const url = "/requisitions-category";
+    const csrf = $('meta[name=csrf-token]').attr('content');
+    const data = {
+        'category_id': $(this).val()
+    };
+    const assetSelect = $('#assetSelect');
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        headers: {
+            'X-CSRF-TOKEN': csrf
+        },
+        data: data,
+        success: function (response) {
+            assetSelect.html("");
+            $.each(response, function (i, asset) {
+                assetSelect.append('<option value=' + '"' + asset.id + '">' + asset.name + ' - ' + asset.code + '</select>')
+            })
+        },
+        error: function (err) {
+            console.log(err)
+
+        }
+
+    })
+})
+
 $('.showRequestModal').click(function (e) {
     e.preventDefault();
 

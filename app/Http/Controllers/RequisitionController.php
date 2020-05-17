@@ -44,10 +44,23 @@ class RequisitionController extends Controller
     public function create()
     {
         abort_if(Gate::denies('request-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $categories = Category::all();
         $assets = Asset::where('category_id', '1')->where('asset_status_id', '1')->get();
 
         return view('requisitions.create')->with(['categories' => $categories, 'assets' => $assets]);
+    }
+
+    public function updateCreate(Request $request)
+    {
+        abort_if(Gate::denies('request-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $category_id = $request->category_id;
+
+        $assets = Asset::where('category_id', $category_id)->where('asset_status_id', '1')->get();
+
+        return $assets;
+
     }
 
     /**
