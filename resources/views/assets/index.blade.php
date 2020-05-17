@@ -7,7 +7,19 @@
     <strong>{{ $message }}</strong>
 </div>
 @endif
-<div class="row justify-content-center">
+<div class="row justify-content-end mt-5">
+    <div class="col-3">
+        <form action="/assets-search" method="get">
+            <div class="input-group">
+                <input type="search" class="form-control" placeholder="Type Name Here">
+                <span class="input-group-prepend">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row justify-content-center mt-2">
     <div class="col-lg-12">
         <section class="content">
 
@@ -60,6 +72,11 @@
                     </table>
                 </div>
                 <!-- /.card-body -->
+                <div class="row">
+                    <div class="col ml-4">
+                        {{ $assets->links() }}
+                    </div>
+                </div>
             </div>
             <!-- /.card -->
 

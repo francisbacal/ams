@@ -61,6 +61,12 @@ Route::put('/assets-trashed/{asset}/restore', 'AssetController@restore')
 Route::post('/assets-trashed/restoreall', 'AssetController@restoreAll')
     ->name('assets.restoreall')->middleware("role:admin");
 
+Route::get('/assets-search', 'AssetController@searchAsset')
+    ->name('assets.search');
+
+Route::get('/assets-sort', 'AssetController@indexSort')
+    ->name('assets.sort');
+
 /*-----------------------
 | REQUESTS
 |----------------------*/

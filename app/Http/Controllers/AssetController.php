@@ -29,6 +29,15 @@ class AssetController extends Controller
         // dd(count($allstock));
 
         $assets = Asset::all();
+        $pageAssets = Asset::paginate(10);
+        return view('assets.index')->with('assets', $pageAssets);
+    }
+    public function indexSort(Request $request)
+    {
+        abort_if(Gate::denies('asset-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $assets = Asset::where('asset_status_id', $request->id)->paginate(10);
+
         return view('assets.index')->with('assets', $assets);
     }
 
@@ -102,6 +111,12 @@ class AssetController extends Controller
 
         return (redirect(route('assets.index'))->with('success', "$asset->name successfully added"));
 
+    }
+    public function searchAsset(Request $request)
+    {
+        $search = $request->get('search');
+        $assets = Asset::where('name', 'like', '%' . $search . '%')->paginate(10);
+        return view('assets.index', ['assets' => $assets]);
     }
 
     /**

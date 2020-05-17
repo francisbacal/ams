@@ -100,6 +100,17 @@ $('#deleteCategoryBtn').click(function (e) {
 | ASSET SECTION JS
 |============================================*/
 
+$('.assetSortLink').click(function (e) {
+    e.preventDefault();
+
+    hiddenInput = $('#assetSortInput');
+
+    hiddenInput.val($(this).data('id'));
+
+    $('#assetSortForm').submit();
+
+})
+
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

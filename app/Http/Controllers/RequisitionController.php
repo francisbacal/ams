@@ -26,12 +26,12 @@ class RequisitionController extends Controller
         $user_id = Auth::user()->id;
 
         if ($user_id == 1) {
-            $requisitions = Requisition::all();
+            $requisitions_paginated = Requisition::all();
         } else {
-            $requisitions = Requisition::where('user_id', $user_id)->get();
+            $requisitions_paginated = Requisition::where('user_id', $user_id)->get();
         }
 
-        $requisitions = $requisitions->sortBy('created_at');
+        $requisitions = $requisitions_paginated->sortBy('created_at');
 
         return view('requisitions.index')->with('requisitions', $requisitions);
     }

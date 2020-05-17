@@ -11,7 +11,9 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-
+        <form action="/assets-sort" method="get" id="assetSortForm">
+            <input type="hidden" id="assetSortInput" name="id">
+        </form>
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
                 <img src="{{  asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
@@ -46,25 +48,31 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a data-action="available" href="#" class="nav-link">
+                            <a data-id="1" href="#" class="nav-link assetSortLink">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Available</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a data-id="2" href="#" class="nav-link assetSortLink">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Deployed</p>
+                                <p>Allocated</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a data-id="3" href="#" class="nav-link assetSortLink">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Reserved</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a data-id="4" href="#" class="nav-link assetSortLink">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>For Diagnosis</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a data-id="5" href="#" class="nav-link assetSortLink">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>For Repair</p>
                             </a>

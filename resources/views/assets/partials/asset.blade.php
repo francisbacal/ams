@@ -14,15 +14,18 @@
         {{ $asset->serial }}
     </td>
     <td class="text-center">
-        @if ($asset->asset_status_id === 1 )
-
-        <span class="badge badge-success">{{ $asset->status->name }}</span>
-
+        <span class="badge badge-success
+        @if ($asset->asset_status_id == 1)
+            badge-success
+        @elseif ($asset->asset_status_id == 2)
+            badge-danger
+        @elseif ($asset->asset_status_id == 3)
+            badge-warning
         @else
-
-        <span class="badge badge-danger">{{ $asset->status->name }}</span>
-
+            badge-danger
         @endif
+        ">{{ $asset->status->name }}</span>
+
     </td>
     <td class="text-center">
         {{ $asset->category->name }}

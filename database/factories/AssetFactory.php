@@ -21,6 +21,7 @@ $factory->define(Asset::class, function (Faker $faker) {
         Touch Bar and Touch ID",
         'image' => '/storage/assets/mbpmbp13.jpg',
         'category_id' => 1,
+        'asset_status_id' => $faker->numberBetween(1, 5),
     ];
 });
 
