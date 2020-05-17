@@ -13,20 +13,20 @@ class PermissionSeeder extends Seeder
     {
         $permissions = [
             [
-                'name' => 'Item Create',
-                'slug' => 'item-create',
+                'name' => 'Request Create',
+                'slug' => 'request-create',
             ],
             [
-                'name' => 'Item Edit',
-                'slug' => 'item-edit',
+                'name' => 'Request Edit',
+                'slug' => 'request-edit',
             ],
             [
-                'name' => 'Item View',
-                'slug' => 'item-view',
+                'name' => 'Request View',
+                'slug' => 'request-view',
             ],
             [
-                'name' => 'Item Destroy',
-                'slug' => 'item-destroy',
+                'name' => 'Request Destroy',
+                'slug' => 'request-destroy',
             ],
             [
                 'name' => 'Asset Create',

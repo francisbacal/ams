@@ -13,7 +13,7 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Requests List</h3>
+                    <h3 class="card-title">@role('admin') Requests List @else Your Requests @endrole </h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
@@ -25,9 +25,14 @@
                     <table class="table table-striped projects">
                         <thead>
                             <tr>
-                                <th class="text-center">
+                                <th class="text-center" style="width: 20%">
                                     Request Code
                                 </th>
+                                @role('admin')
+                                <th class="text-center">
+                                    Requestor
+                                </th>
+                                @endrole
                                 <th class="text-center">
                                     Date Needed
                                 </th>

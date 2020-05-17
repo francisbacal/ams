@@ -46,7 +46,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a data-action="available" href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Available</p>
                             </a>
@@ -60,20 +60,40 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>For Diagnosis/Repair</p>
+                                <p>For Diagnosis</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>For Repair</p>
                             </a>
                         </li>
                     </ul>
                 </li>
                 {{--====== REQUESTS ======--}}
-                <li class="nav-item">
-                    <a href="{{ route('requisitions.index') }}" class="nav-link">
+                <li class="nav-item has-treeview menu-open">
+                    <a href="" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Requests
-                            <span class="right badge badge-danger">New</span>
-                        </p>
+                        <p>Requests<i class="right fas fa-angle-left"></i></p>
                     </a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('requisitions.index') }}"
+                                class="nav-link {{ (Request::url() == route('requisitions.index')) ? "active" : "" }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Request List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('requisitions.create') }}" class="nav-link
+                                {{ (Request::url() == route('requisitions.create')) ? "active" : "" }}"">
+                                <i class=" far fa-circle nav-icon"></i>
+                                <p>Create New Request</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>

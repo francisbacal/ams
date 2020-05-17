@@ -4,6 +4,11 @@
     <td class="text-center">
         {{ $requisition->code }}
     </td>
+    @role('admin')
+    <td class="text-center">
+        {{ $requisition->user->firstname }} {{ $requisition->user->lastname }}
+    </td>
+    @endrole
     <td class="text-center">
         {{ $requisition->requested_date }}
     </td>
@@ -26,14 +31,14 @@
                 <button type="button" class="btn btn-primary btn-sm my-1 showRequestModal"
                     data-id={{ $requisition->id }} data-code={{ $requisition->code }}
                     data-status="{{ $requisition->status->name }}">
-                    <i class="fas fa-folder">
+                    <i class="fas fa-search">
                     </i>
                     View
                 </button>
-                <a class="btn btn-info btn-sm my-1" href="{{ '__ID__' }}">
-                    <i class="fas fa-pencil-alt">
-                    </i>
-                    Edit
+                {{-- <a class="btn btn-info btn-sm my-1" href="{{ '__ID__' }}">
+                <i class="fas fa-pencil-alt">
+                </i>
+                Edit
                 </a>
                 <form action="{{ '__ID__' }}" method="POST" id="deleteAssetForm{{ '__ID__' }}" class="d-inline">
                     @csrf
@@ -44,7 +49,7 @@
                         </i>
                         Delete
                     </button>
-                </form>
+                </form> --}}
             </div>
         </div>
     </td>

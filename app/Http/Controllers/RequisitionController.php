@@ -7,8 +7,10 @@ use App\Category;
 use App\Requisition;
 use App\RequisitionStatus;
 use Auth;
+use Gate;
 use Illuminate\Http\Request;
 use Str;
+use Symfony\Component\HttpFoundation\Response;
 
 class RequisitionController extends Controller
 {
@@ -19,7 +21,18 @@ class RequisitionController extends Controller
      */
     public function index()
     {
-        $requisitions = Requisition::all();
+        abort_if(Gate::denies('request-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $user_id = Auth::user()->id;
+
+        if ($user_id == 1) {
+            $requisitions = Requisition::all();
+        } else {
+            $requisitions = Requisition::where('user_id', $user_id)->get();
+        }
+
+        $requisitions = $requisitions->sortBy('created_at');
+
         return view('requisitions.index')->with('requisitions', $requisitions);
     }
 
@@ -30,6 +43,7 @@ class RequisitionController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('request-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $categories = Category::all();
         $assets = Asset::where('category_id', '1')->where('asset_status_id', '1')->get();
 
@@ -44,6 +58,7 @@ class RequisitionController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if(Gate::denies('request-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $validatedData = $request->validate([
             'requested_date' => 'required|string|max:30',
@@ -77,6 +92,7 @@ class RequisitionController extends Controller
      */
     public function show(Requisition $requisition)
     {
+        abort_if(Gate::denies('request-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return view('requisitions.partials.content.modalcontent')->with(['requisition' => $requisition, 'requisition_statuses' => RequisitionStatus::all()])->render();
     }
 
@@ -100,6 +116,8 @@ class RequisitionController extends Controller
      */
     public function update(Request $request, Requisition $requisition)
     {
+        abort_if(Gate::denies('request-edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $validatedData = $request->validate([
             'requisition_status_id' => 'required|numeric',
         ]);

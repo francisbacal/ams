@@ -38,6 +38,7 @@
             </i>
             View
         </a>
+        @role('admin')
         <a class="btn btn-info btn-sm my-1" href="{{ route('assets.edit', ['asset' => $asset->id]) }}">
             <i class="fas fa-pencil-alt">
             </i>
@@ -54,6 +55,7 @@
                 Delete
             </button>
         </form>
+        @endrole
     </td>
 </tr>
 

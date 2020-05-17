@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row justify-content-center">
-    <div class="col-lg-12">
+    <div class="col-lg-8">
         <section class="content">
             @if ($message = Session::get('success'))
             <div class="alert alert-success alert-block my-3">
@@ -12,7 +12,7 @@
             </div>
             @endif
             <!-- Default box -->
-            <div class="card">
+            <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title"><strong>{{ $asset->code }}</strong></h3>
 
@@ -42,7 +42,7 @@
                                 </p>
                             </div>
                             <div class="card-body table-responsive table-sm p-0 mt-3">
-                                <table class="table table-striped projects">
+                                <table class="table table-striped projects mb-5">
                                     <tr>
                                         <td style="width: 30%; font-weight: bold;">Category</td>
                                         <td>{{ $asset->category->name }}</td>
