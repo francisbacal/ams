@@ -76,12 +76,14 @@ class RegisterController extends Controller
 
         // dd($role);
         // dd($permission);
+        $image = '/dist/img/new-user-avatar.png';
 
         $newUser = new User();
         $newUser->firstname = $data['firstname'];
         $newUser->lastname = $data['lastname'];
         $newUser->email = $data['email'];
         $newUser->password = Hash::make($data['password']);
+        $newUser->image = $image;
 
         $newUser->save();
         $newUser->roles()->attach($role);
