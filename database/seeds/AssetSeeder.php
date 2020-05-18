@@ -15,7 +15,7 @@ class AssetSeeder extends Seeder
         // Asset::truncate();
         factory(Asset::class, 50)->create();
 
-        factory(App\Asset::class, 'A4-paper', 100)->create();
-        factory(App\Asset::class, 'mouse', 50)->create();
+        factory(Asset::class, 100)->states('A4-paper')->create();
+        factory(Asset::class, 50)->states('mouse')->create();
     }
 }

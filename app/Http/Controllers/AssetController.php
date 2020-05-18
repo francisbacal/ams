@@ -30,7 +30,7 @@ class AssetController extends Controller
         // dd(count($allstock));
 
         $assets = Asset::all();
-        $pageAssets = Asset::paginate(10);
+        $pageAssets = Asset::paginate(25);
         return view('assets.index')->with('assets', $pageAssets);
     }
     public function indexSort(Request $request)

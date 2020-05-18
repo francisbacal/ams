@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Asset;
 use App\Category;
+use App\CategoryStock;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
 {
+
+    public function updateCategoryStock($asset, $categoryStock)
+    {
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +23,48 @@ class CategoryController extends Controller
      */
     public function index()
     {
+
+        $categories = Category::all();
+
+        foreach ($categories as $category) {
+            $categoryStock = CategoryStock::where('category_id', $category->id)->get()->first();
+            $assets = Asset::where('category_id', $category->id)->get();
+
+            $categoryStock->total = count($assets);
+            $categoryStock->available = 0;
+            $categoryStock->allocated = 0;
+            $categoryStock->reserved = 0;
+            $categoryStock->for_diagnosis = 0;
+            $categoryStock->for_repair = 0;
+
+            foreach ($assets as $asset) {
+
+                switch ($asset->asset_status_id) {
+                    case 1:
+                        $categoryStock->available++;
+                        break;
+
+                    case 2:
+                        $categoryStock->allocated++;
+                        break;
+
+                    case 3:
+                        $categoryStock->reserved++;
+                        break;
+
+                    case 4:
+                        $categoryStock->for_diagnosis++;
+                        break;
+
+                    case 5:
+                        $categoryStock->for_repair++;
+                        break;
+
+                }
+            }
+            $categoryStock->update();
+        }
+
         return redirect('/category-tree-view');
     }
 
