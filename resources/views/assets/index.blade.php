@@ -74,7 +74,8 @@
                 <!-- /.card-body -->
                 <div class="row">
                     <div class="col ml-4">
-                        {{ $assets->links() }}
+                        {{-- {{ $links }} --}}
+                        {!! $assets->appends(\Request::except('page'))->render() !!}
                     </div>
                 </div>
             </div>

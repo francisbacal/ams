@@ -38,8 +38,9 @@ class AssetController extends Controller
         abort_if(Gate::denies('asset-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $assets = Asset::where('asset_status_id', $request->id)->paginate(10);
+        $links = $assets->appends(['asset_status_id' => $request->id])->links();
 
-        return view('assets.index')->with('assets', $assets);
+        return view('assets.index', compact('assets'));
     }
 
     /**

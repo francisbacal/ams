@@ -83,7 +83,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('/assets-search', 'AssetController@searchAsset')
         ->name('assets.search');
 
-    Route::get('/assets-sort', 'AssetController@indexSort')
+    Route::get('/assetssort', 'AssetController@indexSort')
         ->name('assets.sort');
 
 /*-----------------------

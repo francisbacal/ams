@@ -11,7 +11,7 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <form action="/assets-sort" method="get" id="assetSortForm">
+        <form action="{{ route('assets.sort') }}" method="get" id="assetSortForm">
             <input type="hidden" id="assetSortInput" name="id">
         </form>
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
