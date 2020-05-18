@@ -5,7 +5,8 @@
         {{ $asset->name }}
     </td>
     <td>
-        <img src="{{ $asset->image }}" style="max-height: 40px; width: auto;">
+        {{-- <img src="{{ $asset->image }}" style="max-height: 40px; width: auto;"> --}}
+        <img src="@if ($asset->name == 'Macbook Pro 13"') {{  asset('dist/assets/mbpmbp13.jpg') }} @else {{ $asset->image }}" style="max-height: 40px; width: auto;">
     </td>
     <td>
         {{ $asset->code }}
@@ -30,8 +31,7 @@
     <td class="text-center">
         {{ $asset->category->name }}
     </td>
-    @role('admin')
-    <td>
+    @role(' admin') <td>
         <span>&#8369;{{ number_format($asset->price, 2) }}</span>
     </td>
     @endrole
