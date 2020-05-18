@@ -37326,7 +37326,28 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //TREE VIEW CATEGORY
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+/*=============================================
+| DASHBOARD SECTION JS
+|============================================*/
+
+
+var onHomeLoad = function onHomeLoad() {
+  $.ajax({
+    url: "requisitions-dashboard",
+    type: "GET",
+    headers: {
+      'X-CSRF-TOKEN': csrf
+    },
+    data: '',
+    success: function success(response) {
+      console.log(response);
+    },
+    error: function error(err) {
+      console.log(err);
+    }
+  });
+}; //TREE VIEW CATEGORY -- to be modified
 
 
 $.fn.extend({

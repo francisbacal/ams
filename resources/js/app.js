@@ -1,9 +1,33 @@
 require('./bootstrap');
 
 
-//TREE VIEW CATEGORY
+
+/*=============================================
+| DASHBOARD SECTION JS
+|============================================*/
+
+let onHomeLoad = function () {
+    
+    $.ajax({
+        url: "requisitions-dashboard",
+        type: "GET",
+        headers: {
+            'X-CSRF-TOKEN': csrf
+        },
+        data: '',
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (err) {
+            console.log(err)
+
+        }
+
+    })
+}
 
 
+//TREE VIEW CATEGORY -- to be modified
 
 $.fn.extend({
     treed: function (o) {

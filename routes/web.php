@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['middleware' => ['auth', 'web']], function () {
+
 /*-----------------------
 | USERS
 |----------------------*/
@@ -29,53 +31,58 @@ Route::get('/home', 'HomeController@index')->name('home');
 | CATEGORIES
 |----------------------*/
 
-Route::get('/categories/trashed', 'CategoryController@softDeleted')
-    ->name('categories.trashed')->middleware("role:admin");
+    Route::get('/categories/trashed', 'CategoryController@softDeleted')
+        ->name('categories.trashed')->middleware("role:admin");
 
-Route::put('/categories/{category}/restore', 'CategoryController@restore')
-    ->name('categories.restore')->middleware("role:admin");
+    Route::put('/categories/{category}/restore', 'CategoryController@restore')
+        ->name('categories.restore')->middleware("role:admin");
 
-Route::post('/categories/trashed/restoreall', 'CategoryController@restoreAll')
-    ->name('categories.restoreall')->middleware("role:admin");
+    Route::post('/categories/trashed/restoreall', 'CategoryController@restoreAll')
+        ->name('categories.restoreall')->middleware("role:admin");
 
-Route::post('add-category', ['as' => 'add.category', 'uses' => 'CategoryController@addCategory'])->middleware("role:admin");
+    Route::post('add-category', ['as' => 'add.category', 'uses' => 'CategoryController@addCategory'])->middleware("role:admin");
 
-Route::get('category-tree-view', ['uses' => 'CategoryController@manageCategory']);
+    Route::get('category-tree-view', ['uses' => 'CategoryController@manageCategory']);
 
-Route::resource('categories', 'CategoryController')->only('update', 'index', 'destroy');
+    Route::resource('categories', 'CategoryController')->only('update', 'index', 'destroy');
 
 /*-----------------------
 | ASSETS
 |----------------------*/
 
-Route::resource('assets', 'AssetController');
+    Route::resource('assets', 'AssetController');
 
 // Route::get('/assets-trashed', ['as' => 'assets.trashed', 'uses' => 'AssetController@softDeleted']);
 
-Route::get('/assets-trashed', 'AssetController@softDeleted')
-    ->name('assets.trashed')->middleware("role:admin");
+    Route::get('/assets-trashed', 'AssetController@softDeleted')
+        ->name('assets.trashed')->middleware("role:admin");
 
-Route::put('/assets-trashed/{asset}/restore', 'AssetController@restore')
-    ->name('assets.restore')->middleware("role:admin");
+    Route::put('/assets-trashed/{asset}/restore', 'AssetController@restore')
+        ->name('assets.restore')->middleware("role:admin");
 
-Route::post('/assets-trashed/restoreall', 'AssetController@restoreAll')
-    ->name('assets.restoreall')->middleware("role:admin");
+    Route::post('/assets-trashed/restoreall', 'AssetController@restoreAll')
+        ->name('assets.restoreall')->middleware("role:admin");
 
-Route::get('/assets-search', 'AssetController@searchAsset')
-    ->name('assets.search');
+    Route::get('/assets-search', 'AssetController@searchAsset')
+        ->name('assets.search');
 
-Route::get('/assets-sort', 'AssetController@indexSort')
-    ->name('assets.sort');
+    Route::get('/assets-sort', 'AssetController@indexSort')
+        ->name('assets.sort');
 
 /*-----------------------
 | REQUESTS
 |----------------------*/
 
-Route::get('/requisitions-category', 'RequisitionController@updateCreate');
-Route::resource('requisitions', 'RequisitionController');
+    Route::get('/requisitions-category', 'RequisitionController@updateCreate');
+    Route::resource('requisitions', 'RequisitionController');
+
+    Route::get('/requisitions-dashboard', 'RequisitionController@dashboardRequest')
+        ->name('requisitions.dash')->middleware('role:admin');
 
 /*-----------------------
 | PERMISSIONS
 |----------------------*/
 
-Route::resource('permissions', 'PermissionController')->middleware('role:admin');
+    Route::resource('permissions', 'PermissionController')->middleware('role:admin');
+
+});

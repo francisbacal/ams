@@ -107,7 +107,7 @@
 </div>
 <div class="row justify-content-end pb-5">
     <div class="col-auto">
-        <a href="#" class="text-danger mr-2">Cancel</a>
+        <a href="{{ route('assets.index') }}" class="text-danger mr-2">Cancel</a>
         <button type="submit" class="btn btn-primary">Add Asset</button>
     </div>
 </div>

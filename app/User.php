@@ -38,4 +38,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function section()
+    {
+        return $this->belongsTo('App\Section');
+    }
+
+    public function assets()
+    {
+        return $this->belongsToMany('App\Asset', 'asset_user')->withTimestamps();
+    }
 }

@@ -26,12 +26,12 @@ class RequisitionController extends Controller
         $user_id = Auth::user()->id;
 
         if ($user_id == 1) {
-            $requisitions_paginated = Requisition::all();
+            $requisitions_paginated = Requisition::orderBy('created_at', 'desc')->get();
         } else {
-            $requisitions_paginated = Requisition::where('user_id', $user_id)->get();
+            $requisitions_paginated = Requisition::orderBy('created_at', 'desc')->where('user_id', $user_id)->get();
         }
 
-        $requisitions = $requisitions_paginated->sortBy('created_at');
+        $requisitions = $requisitions_paginated;
 
         return view('requisitions.index')->with('requisitions', $requisitions);
     }
@@ -151,5 +151,14 @@ class RequisitionController extends Controller
     public function destroy(Requisition $requisition)
     {
         //
+    }
+
+    public function dashboardRequest()
+    {
+        abort_if(Gate::denies('request-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $requisitions = Requisition::where('requisition_status_id', 1)->limit(4)->orderBy('date_created', 'asc');
+
+        return $requisitions;
     }
 }

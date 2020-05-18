@@ -20,7 +20,7 @@
         @if ($asset->asset_status_id == 1)
             badge-success
         @elseif ($asset->asset_status_id == 2)
-            badge-danger
+            badge-info
         @elseif ($asset->asset_status_id == 3)
             badge-warning
         @else
@@ -32,9 +32,13 @@
     <td class="text-center">
         {{ $asset->category->name }}
     </td>
-    @role(' admin') <td>
+    
+    @role('admin')
+
+    <td>
         <span>&#8369;{{ number_format($asset->price, 2) }}</span>
     </td>
+
     @endrole
     <td>
         <a class="btn btn-primary btn-sm my-1" href="{{ route('assets.show', ['asset' => $asset->id])  }}">

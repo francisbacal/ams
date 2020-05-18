@@ -7,7 +7,7 @@
     <strong>{{ $message }}</strong>
 </div>
 @endif
-<div class="row justify-content-end mt-5">
+<div class="row justify-content-end mt-3">
     <div class="col-3">
         <form action="/assets-search" method="get">
             <div class="input-group">
