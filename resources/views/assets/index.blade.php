@@ -11,7 +11,7 @@
     <div class="col-3">
         <form action="/assets-search" method="get">
             <div class="input-group">
-                <input type="search" class="form-control" placeholder="Type Name Here">
+                <input type="search" class="form-control" placeholder="Type Code Here">
                 <span class="input-group-prepend">
                     <button type="submit" class="btn btn-primary">Search</button>
                 </span>

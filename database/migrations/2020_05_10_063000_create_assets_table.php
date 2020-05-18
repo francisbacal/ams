@@ -19,8 +19,8 @@ class CreateAssetsTable extends Migration
             $table->string('code');
             $table->string('serial');
             $table->float('price', 12, 2);
-            $table->longText('description')->nullable();
-            $table->string('image');
+            $table->longText('description');
+            $table->string('image')->default('dist/img/new-user-avatar.png');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('asset_status_id')->default(1);

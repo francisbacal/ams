@@ -116,7 +116,7 @@ class AssetController extends Controller
     public function searchAsset(Request $request)
     {
         $search = $request->get('search');
-        $assets = Asset::where('name', 'like', '%' . $search . '%')->paginate(10);
+        $assets = Asset::where('code', 'like', '%' . $search . '%')->paginate(10);
         return view('assets.index', ['assets' => $assets]);
     }
 
