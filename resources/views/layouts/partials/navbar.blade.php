@@ -12,6 +12,9 @@
         </li>
         @role('admin')
         <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ route("assets.allocate") }}" class="nav-link">Allocate</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
             <a href="{{ route("register") }}" class="nav-link">Register</a>
         </li>
         @endrole
