@@ -26,7 +26,6 @@
             background: rgb(96, 178, 229);
             background: radial-gradient(circle, rgba(96, 178, 229, 1) 0%, rgba(6, 38, 59, 1) 94%);
         }
-
     </style>
 </head>
 
@@ -106,11 +105,11 @@
                             </form>
 
 
-                            @if (Route::has('password.request'))
+                            {{-- @if (Route::has('password.request'))
                             <a class="btn btn-link p-0" href="{{ route('password.request') }}">
-                                {{ __('Forgot Your Password?') }}
+                            {{ __('Forgot Your Password?') }}
                             </a>
-                            @endif
+                            @endif --}}
                         </div>
                         <!-- /.login-card-body -->
                     </div>
