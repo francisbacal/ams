@@ -30,7 +30,7 @@ $factory->define(Asset::class, function (Faker $faker) {
 
 //A4
 
-$factory->defineAs(App\User::class, 'A4-paper', function (Faker\Generator $faker) {
+$factory->state(App\Asset::class, 'A4-paper', function (Faker $faker) {
     $serial = $faker->bothify('#??###?#?');
     $date = Carbon::now()->format('Ymd');
     $code = "AMS-" . $serial . $date;
@@ -50,7 +50,7 @@ $factory->defineAs(App\User::class, 'A4-paper', function (Faker\Generator $faker
 
 //mouse
 
-$factory->defineAs(App\User::class, 'mouse', function (Faker\Generator $faker) {
+$factory->state(App\Asset::class, 'mouse', function (Faker $faker) {
     $serial = $faker->bothify('#??###?#?');
     $date = Carbon::now()->format('Ymd');
     $code = "AMS-" . $serial . $date;

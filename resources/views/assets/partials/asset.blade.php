@@ -33,7 +33,8 @@
         {{ $asset->category->name }}
     </td>
     
-    @role(' admin') <td>
+    @role('admin') 
+    <td>
         <span>&#8369;{{ number_format($asset->price, 2) }}</span>
     </td>
 
