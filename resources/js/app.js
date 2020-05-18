@@ -7,7 +7,7 @@ require('./bootstrap');
 |============================================*/
 
 let onHomeLoad = function () {
-    
+
     $.ajax({
         url: "requisitions-dashboard",
         type: "GET",
@@ -208,7 +208,7 @@ $('#requestCategorySelect').change(function () {
 
     $.ajax({
         url: url,
-        type: "GET",
+        type: "POST",
         headers: {
             'X-CSRF-TOKEN': csrf
         },
@@ -216,7 +216,7 @@ $('#requestCategorySelect').change(function () {
         success: function (response) {
             assetSelect.html("");
             $.each(response, function (i, asset) {
-                assetSelect.append('<option value=' + '"' + asset.id + '">' + asset.name + ' - ' + asset.code + '</select>')
+                assetSelect.append('<option value=' + '"' + asset.id + '">' + asset.name + ' - ' + asset.code + '</option>')
             })
         },
         error: function (err) {
@@ -297,5 +297,67 @@ $('.showRequestModal').click(function (e) {
                 modal.find('.modal-body').html('');
             })
         })
+    })
+})
+
+/*=============================================
+| ALLOCATE & WITHHOLD SECTION JS
+|============================================*/
+
+$('#allocateCategorySelect').change(function () {
+    const url = "/allocate-option";
+    const csrf = $('meta[name=csrf-token]').attr('content');
+    const data = {
+        'category_id': $(this).val()
+    };
+    const assetSelect = $('#assetSelect');
+
+    $.ajax({
+        url: url,
+        type: "POST",
+        headers: {
+            'X-CSRF-TOKEN': csrf
+        },
+        data: data,
+        success: function (response) {
+            assetSelect.html("");
+            $.each(response, function (i, asset) {
+                assetSelect.append('<option value=' + '"' + asset.id + '">' + asset.name + ' - ' + asset.code + '</option>')
+            })
+        },
+        error: function (err) {
+            console.log(err)
+
+        }
+
+    })
+})
+
+$('#userSelectWithhold').change(function () {
+    const url = "/withhold-option";
+    const csrf = $('meta[name=csrf-token]').attr('content');
+    const data = {
+        'user_id': $(this).val()
+    };
+    const assetSelect = $('#assetSelect');
+
+    $.ajax({
+        url: url,
+        type: "POST",
+        headers: {
+            'X-CSRF-TOKEN': csrf
+        },
+        data: data,
+        success: function (response) {
+            assetSelect.html("");
+            $.each(response, function (i, asset) {
+                assetSelect.append('<option value=' + '"' + asset.id + '">' + asset.name + ' - ' + asset.code + '</option>')
+            })
+        },
+        error: function (err) {
+            console.log(err)
+
+        }
+
     })
 })

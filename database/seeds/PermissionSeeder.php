@@ -60,6 +60,14 @@ class PermissionSeeder extends Seeder
                 'name' => 'Category Destroy',
                 'slug' => 'category-destroy',
             ],
+            [
+                'name' => 'Asset Allocate',
+                'slug' => 'asset-allocate',
+            ],
+            [
+                'name' => 'Asset Withhold',
+                'slug' => 'asset-withhold',
+            ],
         ];
 
         DB::table('permissions')->insert($permissions);

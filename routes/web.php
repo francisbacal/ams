@@ -27,6 +27,23 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 | USERS
 |----------------------*/
 
+    Route::get('/allocate', 'UserController@allocate')
+        ->name('assets.allocate')->middleware('role:admin');
+
+    Route::post('/allocate-deploy', 'UserController@deploy')
+        ->name('assets.deploy')->middleware('role:admin');
+
+    Route::post('/withhold', 'UserController@take')
+        ->name('assets.withhold')->middleware('role:admin');
+
+    Route::post('/take', 'UserController@withhold')
+        ->name('assets.take')->middleware('role:admin');
+
+    Route::post('/allocate-option', 'UserController@changeOptions')
+        ->name('assets.options')->middleware('role:admin');
+
+    Route::post('/withhold-option', 'UserController@withholdOptions')
+        ->name('assets.withholdoptions')->middleware('role:admin');
 /*-----------------------
 | CATEGORIES
 |----------------------*/

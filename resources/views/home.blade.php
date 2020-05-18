@@ -130,7 +130,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @include('partials.home.requesthome')
+                        @include('partials.home.admin.requesthome')
                     </tbody>
                 </table>
             </div>
@@ -185,13 +185,14 @@
                                     <table class="table table-striped table-valign-middle">
                                         <thead>
                                             <tr>
+                                                <th class="text-center" style="width: 5%;">Image</th>
                                                 <th>Name</th>
                                                 <th>Code</th>
-                                                <th class="text-center" style="width: 8%;">Dates</th>
+                                                <th>Serial</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {{-- @include('partials.home.requesthome') --}}
+                                            @include('partials.home.requesthome', ['assets' => $user->assets])
                                         </tbody>
                                     </table>
                                 </div>

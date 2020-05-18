@@ -25,18 +25,29 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
-                            <h3 class="text-primary"><i class="fas fa-ethernet"></i> {{ $asset->name }} </h3>
+                            <div class="d-flex">
+                                <h3 class="text-primary"><i class="fas fa-ethernet"></i> {{ $asset->name }} </h3>
+                                @role('admin')
+                                @if($asset->asset_status_id == '2')
+                                <form action="{{ route('assets.withhold') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="asset_id" value="{{ $asset->id }}">
+                                    <button type="submit" class="btn btn-sm btn-danger ml-3">Withhold</button>
+                                </form>
+                                @endif
+                                @endrole
+                            </div>
                             <div class="text-muted">
                                 <p class="text-md">Status:&nbsp;
                                     <b class="badge
-                                    @if ($asset->asset_status_id === 1)
-                                    
-                                    badge-success
-
+                                    @if ($asset->asset_status_id == 1)
+                                        badge-success
+                                    @elseif ($asset->asset_status_id == 2)
+                                        badge-info
+                                    @elseif ($asset->asset_status_id == 3)
+                                        badge-warning
                                     @else
-
-                                    badge-danger
-                                        
+                                        badge-danger
                                     @endif
                                     ">{{ $asset->status->name }}</b>
                                 </p>
@@ -62,7 +73,19 @@
                                         <td>{{ $asset->description }}</td>
                                     </tr>
                                 </table>
-                                <a href="{{ route('assets.index') }}" class="text-primary mt-5"><i
+
+                            </div>
+                            <div class="card-footer">
+                                @if ($asset->user_id != null)
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p>Currently allocated to:
+                                            <span><strong>{{ $asset->user->firstname }}
+                                                    {{ $asset->user->lastname }}</strong></span></p>
+                                    </div>
+                                </div>
+                                @endif
+                                <a href="javascript:history.back()" class="text-primary mt-5"><i
                                         class="fas fa-arrow-left"></i> Back to Assets List</a>
                             </div>
                         </div>

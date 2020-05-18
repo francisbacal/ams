@@ -46,6 +46,6 @@ class User extends Authenticatable
 
     public function assets()
     {
-        return $this->belongsToMany('App\Asset', 'asset_user')->withTimestamps();
+        return $this->hasMany('App\Asset');
     }
 }

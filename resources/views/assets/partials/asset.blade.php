@@ -16,7 +16,7 @@
         {{ $asset->serial }}
     </td>
     <td class="text-center">
-        <span class="badge badge-success
+        <span class="badge
         @if ($asset->asset_status_id == 1)
             badge-success
         @elseif ($asset->asset_status_id == 2)

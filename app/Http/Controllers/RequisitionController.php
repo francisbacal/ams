@@ -57,7 +57,7 @@ class RequisitionController extends Controller
 
         $category_id = $request->category_id;
 
-        $assets = Asset::where('category_id', $category_id)->where('asset_status_id', '1')->get();
+        $assets = Asset::where('category_id', $category_id)->whereIn('asset_status_id', '1')->get();
 
         return $assets;
 
@@ -157,7 +157,7 @@ class RequisitionController extends Controller
     {
         abort_if(Gate::denies('request-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $requisitions = Requisition::where('requisition_status_id', 1)->limit(4)->orderBy('date_created', 'asc');
+        $requisitions = Requisition::orderBy('date_created', 'asc')->where('requisition_status_id', 1)->limit(4);
 
         return $requisitions;
     }

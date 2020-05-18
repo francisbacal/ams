@@ -6,6 +6,7 @@ use App\Asset;
 use App\AssetStatus;
 use App\Category;
 use App\CategoryStock;
+use App\User;
 use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
@@ -128,6 +129,7 @@ class AssetController extends Controller
     public function show(Asset $asset)
     {
         abort_if(Gate::denies('asset-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return view('assets.show')->with('asset', $asset);
     }
 

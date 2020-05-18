@@ -22,9 +22,11 @@ class CreateAssetsTable extends Migration
             $table->longText('description')->nullable();
             $table->string('image');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('asset_status_id')->default(1);
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('asset_status_id')->references('id')->on('asset_statuses');
             $table->softDeletes();

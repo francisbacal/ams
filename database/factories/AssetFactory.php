@@ -5,11 +5,15 @@
 use App\Asset;
 use Carbon\Carbon;
 use Faker\Generator as Faker;
+use Illuminate\Support\Arr;
 
 $factory->define(Asset::class, function (Faker $faker) {
     $serial = $faker->bothify('#??###?#?');
     $date = Carbon::now()->format('Ymd');
     $code = "AMS-" . $serial . "-" . $date;
+    $array = [1, 3, 4, 5];
+    $rand_status = Arr::random($array);
+    
 
     return [
         'name' => 'Macbook Pro 13"',
@@ -21,7 +25,7 @@ $factory->define(Asset::class, function (Faker $faker) {
         Touch Bar and Touch ID",
         'image' => 'http://ams-management.herokuapp.com/dist/img/assets/mbpmbp13.jpg',
         'category_id' => 1,
-        'asset_status_id' => $faker->numberBetween(1, 5),
+        'asset_status_id' => $rand_status,
     ];
 });
 

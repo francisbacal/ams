@@ -37508,7 +37508,7 @@ $('#requestCategorySelect').change(function () {
   var assetSelect = $('#assetSelect');
   $.ajax({
     url: url,
-    type: "GET",
+    type: "POST",
     headers: {
       'X-CSRF-TOKEN': csrf
     },
@@ -37516,7 +37516,7 @@ $('#requestCategorySelect').change(function () {
     success: function success(response) {
       assetSelect.html("");
       $.each(response, function (i, asset) {
-        assetSelect.append('<option value=' + '"' + asset.id + '">' + asset.name + ' - ' + asset.code + '</select>');
+        assetSelect.append('<option value=' + '"' + asset.id + '">' + asset.name + ' - ' + asset.code + '</option>');
       });
     },
     error: function error(err) {
@@ -37591,6 +37591,60 @@ $('.showRequestModal').click(function (e) {
         modal.find('.modal-body').html('');
       });
     });
+  });
+});
+/*=============================================
+| ALLOCATE & WITHHOLD SECTION JS
+|============================================*/
+
+$('#allocateCategorySelect').change(function () {
+  var url = "/allocate-option";
+  var csrf = $('meta[name=csrf-token]').attr('content');
+  var data = {
+    'category_id': $(this).val()
+  };
+  var assetSelect = $('#assetSelect');
+  $.ajax({
+    url: url,
+    type: "POST",
+    headers: {
+      'X-CSRF-TOKEN': csrf
+    },
+    data: data,
+    success: function success(response) {
+      assetSelect.html("");
+      $.each(response, function (i, asset) {
+        assetSelect.append('<option value=' + '"' + asset.id + '">' + asset.name + ' - ' + asset.code + '</option>');
+      });
+    },
+    error: function error(err) {
+      console.log(err);
+    }
+  });
+});
+$('#userSelectWithhold').change(function () {
+  var url = "/withhold-option";
+  var csrf = $('meta[name=csrf-token]').attr('content');
+  var data = {
+    'user_id': $(this).val()
+  };
+  var assetSelect = $('#assetSelect');
+  $.ajax({
+    url: url,
+    type: "POST",
+    headers: {
+      'X-CSRF-TOKEN': csrf
+    },
+    data: data,
+    success: function success(response) {
+      assetSelect.html("");
+      $.each(response, function (i, asset) {
+        assetSelect.append('<option value=' + '"' + asset.id + '">' + asset.name + ' - ' + asset.code + '</option>');
+      });
+    },
+    error: function error(err) {
+      console.log(err);
+    }
   });
 });
 

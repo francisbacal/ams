@@ -1,20 +1,26 @@
-@extends('layouts.requisition')
+@extends('layouts.asset')
 
 @section('content')
-@if ($message = Session::get('success'))
-<div class="alert alert-success alert-block my-3">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>{{ $message }}</strong>
-</div>
-@endif
+
 <div class="row justify-content-center">
+
     <div class="col-xl-6 col-lg-8 col-md-10">
         <section class="content">
-
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block my-3">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @elseif ($message = Session::get('fail'))
+            <div class="alert alert-danger alert-block my-3">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
             <!-- Default box -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Request Form</h3>
+                    <h3 class="card-title">Allocate Asset</h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                             title="Collapse">
@@ -22,10 +28,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('requisitions.store') }}" method="POST">
+                    <form action="{{ route('assets.deploy') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="reservation">Category:</label>
+                            <label for="allocateCategorySelect">Category:</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -33,7 +39,7 @@
                                     </span>
                                 </div>
                                 <select class="form-control custom-select" name="category_id"
-                                    id="requestCategorySelect">
+                                    id="allocateCategorySelect">
                                     @foreach ($categories as $category)
 
                                     <option value="{{ $category->id }}">
@@ -42,6 +48,8 @@
                                 </select>
                             </div>
                         </div>
+
+                        <!--====== <ASSETS> ======-->
                         <div class="form-group">
                             <label for="inputCategory">Asset:</label>
                             <div class="select2-blue">
@@ -56,25 +64,24 @@
                             <span class="text-danger">{{ $errors->first('assets') }}</span>
                             {{-- </div> --}}
                         </div>
-                        <div class="form-group">
-                            <label for="reservation">Date Needed:</label>
+                        <!--====== </ASSETS> ======-->
 
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="far fa-calendar-alt"></i>
-                                    </span>
-                                </div>
-                                <input type="text" class="form-control float-right" name="requested_date"
-                                    id="reservation">
-                                <span class="text-danger">{{ $errors->first('requested_date') }}</span>
-                            </div>
-                        </div>
+                        <!--====== <USER> ======-->
                         <div class="form-group">
-                            <label for="requestNote">Notes:</label>
-                            <textarea id="requestNote" name="notes" class="form-control" rows="4"></textarea>
-                            <span class="text-danger">{{ $errors->first('notes') }}</span>
+                            <label>Allocate to:</label>
+                            <div class="input-group">
+                                <select name="user_id" class="form-control select2bs4" style="width: 100%;"
+                                    id=userSelect>
+                                    @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->firstname }} {{ $user->lastname }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <span class="text-danger">{{ $errors->first('user_id') }}</span>
                         </div>
+                        <!--====== </USER> ======-->
+
                         <div class="d-flex justify-content-end p-0">
                             <button id="submitRequest" type="submit" class="btn btn-primary">Submit</button>
                         </div>
@@ -84,4 +91,5 @@
     </div>
 
 </div>
+
 @endsection

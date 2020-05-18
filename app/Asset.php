@@ -33,6 +33,10 @@ class Asset extends Model
         return $this->belongsTo('App\AssetStatus', 'asset_status_id');
 
     }
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 
     protected function serializeDate(DateTimeInterface $date)
     {
