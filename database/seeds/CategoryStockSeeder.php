@@ -13,7 +13,7 @@ class CategoryStockSeeder extends Seeder
     {
         DB::table('category_stocks')->insert([
             [
-                'available' => 50,
+                'available' => 0,
                 'total' => 50,
                 'category_id' => 1,
             ],
@@ -29,7 +29,7 @@ class CategoryStockSeeder extends Seeder
             ],
             [
                 'available' => 0,
-                'total' => 0,
+                'total' => 50,
                 'category_id' => 4,
             ],
             [
@@ -48,8 +48,8 @@ class CategoryStockSeeder extends Seeder
                 'category_id' => 7,
             ],
             [
-                'available' => 0,
-                'total' => 0,
+                'available' => 100,
+                'total' => 100,
                 'category_id' => 8,
             ],
             [

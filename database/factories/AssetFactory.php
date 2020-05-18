@@ -10,10 +10,9 @@ use Illuminate\Support\Arr;
 $factory->define(Asset::class, function (Faker $faker) {
     $serial = $faker->bothify('#??###?#?');
     $date = Carbon::now()->format('Ymd');
-    $code = "AMS-" . $serial . "-" . $date;
+    $code = "AMS-" . $serial . $date;
     $array = [1, 3, 4, 5];
     $rand_status = Arr::random($array);
-    
 
     return [
         'name' => 'Macbook Pro 13"',
@@ -29,8 +28,42 @@ $factory->define(Asset::class, function (Faker $faker) {
     ];
 });
 
-//LAPTOP
+//A4
 
-$factory->state(App\Models\AssetModel::class, 'mbp-13', function ($faker) {
+$factory->defineAs(App\User::class, 'A4-paper', function (Faker\Generator $faker) {
+    $serial = $faker->bothify('#??###?#?');
+    $date = Carbon::now()->format('Ymd');
+    $code = "AMS-" . $serial . $date;
+    $array = [1, 3, 4, 5];
+    $rand_status = Arr::random($array);
+    return [
+        'name' => 'A4 Paper',
+        'code' => $code,
+        'serial' => $serial,
+        'price' => '200',
+        'description' => "A4 Paper Bundle",
+        'image' => 'dist/img/assets/A4paper.jpg',
+        'category_id' => 8,
+        'asset_status_id' => 1,
+    ];
+});
 
+//mouse
+
+$factory->defineAs(App\User::class, 'mouse', function (Faker\Generator $faker) {
+    $serial = $faker->bothify('#??###?#?');
+    $date = Carbon::now()->format('Ymd');
+    $code = "AMS-" . $serial . $date;
+    $array = [1, 3, 5];
+    $rand_status = Arr::random($array);
+    return [
+        'name' => 'Hp Mouse',
+        'code' => $code,
+        'serial' => $serial,
+        'price' => '200',
+        'description' => "A4 Paper Bundle",
+        'image' => 'dist/img/assets/hpmouse.jpg',
+        'category_id' => 4,
+        'asset_status_id' => $rand_status,
+    ];
 });
