@@ -6,7 +6,8 @@
     </td>
     <td>
         {{-- <img src="{{ $asset->image }}" style="max-height: 40px; width: auto;"> --}}
-        <img src="@if($asset->name == 'Macbook Pro 13"'){{  asset('dist/img/assets/mbpmbp13.jpg') }}@else{{ $asset->image }}@endif" style="max-height: 40px; width: auto;">
+        <img src="@if($asset->name == 'Macbook Pro 13"'){{  asset('dist/img/assets/mbpmbp13.jpg') }}@else{{ $asset->image }}@endif"
+        style="max-height: 40px; width: auto;">
     </td>
     <td>
         {{ $asset->code }}
