@@ -19,7 +19,7 @@ $factory->define(Asset::class, function (Faker $faker) {
         'description' => "1.4GHz Quad-Core Processor with Turbo Boost up to 3.9GHz
         256 GB Storage
         Touch Bar and Touch ID",
-        'image' => '/storage/assets/mbpmbp13.jpg',
+        'image' => '/public/assets/mbpmbp13.jpg',
         'category_id' => 1,
         'asset_status_id' => $faker->numberBetween(1, 5),
     ];
