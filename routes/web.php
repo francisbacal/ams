@@ -102,4 +102,11 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
     Route::resource('permissions', 'PermissionController')->middleware('role:admin');
 
+/*-----------------------
+| Stocks
+|----------------------*/
+
+    Route::get('/get-stocks', 'CategoryStockController@getStock')
+        ->name('stocks.get');
+
 });

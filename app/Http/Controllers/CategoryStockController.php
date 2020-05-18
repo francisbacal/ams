@@ -145,6 +145,27 @@ class CategoryStockController extends Controller
         $categoryStock->update();
     }
 
+    public function getStock()
+    {
+        $categories = Category::all()->pluck('name');
+        $categoryStocksTotal = CategoryStock::all()->pluck('total');
+        $labels = [];
+        $stocks = [];
+
+        foreach ($categories as $category) {
+            $labels[] = $category;
+        }
+
+        foreach ($categoryStocksTotal as $total) {
+            $stocks[] = $total;
+        }
+
+        // var_dump($stocks)
+
+        return response([$labels, $stocks]);
+
+    }
+
     /**
      * Display a listing of the resource.
      *

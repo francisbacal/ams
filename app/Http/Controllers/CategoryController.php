@@ -166,4 +166,5 @@ class CategoryController extends Controller
         Category::onlyTrashed()->restore();
         return back()->with('success', 'Restored all successfully');
     }
+
 }
