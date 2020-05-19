@@ -53,7 +53,10 @@
                                 @endrole
                             </div>
                         </div>
-
+                        <p>
+                            <strong>Requestor:</strong>
+                            <span class="ml-2">{{ $requisition->user->firstname }} {{ $requisition->user->lastname }}</span>
+                        </p>
                         <p>
                             <strong>Requested Date:</strong>
                             <span class="ml-2">{{ $requisition->requested_date }}</span>

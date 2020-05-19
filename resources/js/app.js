@@ -200,7 +200,6 @@ $('.deleteAssetBtn').click(function (e) {
 |============================================*/
 
 $('#requestCategorySelect').change(function () {
-    console.log('gumagana');
     const url = "/requisitions-category";
     const csrf = $('meta[name=csrf-token]').attr('content');
     const data = {
@@ -315,7 +314,7 @@ $('#allocateCategorySelect').change(function () {
         'category_id': $(this).val()
     };
     const assetSelect = $('#assetSelect');
-
+    assetSelect.prop('disabled', true);
     $.ajax({
         url: url,
         type: "POST",
@@ -328,6 +327,7 @@ $('#allocateCategorySelect').change(function () {
             $.each(response, function (i, asset) {
                 assetSelect.append('<option value=' + '"' + asset.id + '">' + asset.name + ' - ' + asset.code + '</option>')
             })
+            assetSelect.prop('disabled', false);
         },
         error: function (err) {
             console.log(err)
@@ -344,6 +344,7 @@ $('#userSelectWithhold').change(function () {
         'user_id': $(this).val()
     };
     const assetSelect = $('#assetSelect');
+    assetSelect.prop('disabled', true);
 
     $.ajax({
         url: url,
@@ -357,6 +358,7 @@ $('#userSelectWithhold').change(function () {
             $.each(response, function (i, asset) {
                 assetSelect.append('<option value=' + '"' + asset.id + '">' + asset.name + ' - ' + asset.code + '</option>')
             })
+            assetSelect.prop('disabled', false);
         },
         error: function (err) {
             console.log(err)

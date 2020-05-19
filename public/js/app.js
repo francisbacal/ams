@@ -37500,7 +37500,6 @@ $('.deleteAssetBtn').click(function (e) {
 |============================================*/
 
 $('#requestCategorySelect').change(function () {
-  console.log('gumagana');
   var url = "/requisitions-category";
   var csrf = $('meta[name=csrf-token]').attr('content');
   var data = {
@@ -37607,6 +37606,7 @@ $('#allocateCategorySelect').change(function () {
     'category_id': $(this).val()
   };
   var assetSelect = $('#assetSelect');
+  assetSelect.prop('disabled', true);
   $.ajax({
     url: url,
     type: "POST",
@@ -37619,6 +37619,7 @@ $('#allocateCategorySelect').change(function () {
       $.each(response, function (i, asset) {
         assetSelect.append('<option value=' + '"' + asset.id + '">' + asset.name + ' - ' + asset.code + '</option>');
       });
+      assetSelect.prop('disabled', false);
     },
     error: function error(err) {
       console.log(err);
@@ -37632,6 +37633,7 @@ $('#userSelectWithhold').change(function () {
     'user_id': $(this).val()
   };
   var assetSelect = $('#assetSelect');
+  assetSelect.prop('disabled', true);
   $.ajax({
     url: url,
     type: "POST",
@@ -37644,6 +37646,7 @@ $('#userSelectWithhold').change(function () {
       $.each(response, function (i, asset) {
         assetSelect.append('<option value=' + '"' + asset.id + '">' + asset.name + ' - ' + asset.code + '</option>');
       });
+      assetSelect.prop('disabled', false);
     },
     error: function error(err) {
       console.log(err);
