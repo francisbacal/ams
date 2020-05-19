@@ -107,7 +107,22 @@ class RequisitionController extends Controller
     {
         abort_if(Gate::denies('request-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('requisitions.partials.content.modalcontent')->with(['requisition' => $requisition, 'requisition_statuses' => RequisitionStatus::all()])->render();
+        $user_id = Auth::user()->id;
+
+        if (\Request::ajax()) {
+
+            if ($user_id = 1) {
+                return view('requisitions.partials.content.modalcontent')->with(['requisition' => $requisition, 'requisition_statuses' => RequisitionStatus::all()])->render();
+
+            } else if ($requisition->user->id == $user_id) {
+                return view('requisitions.partials.content.modalcontent')->with(['requisition' => $requisition, 'requisition_statuses' => RequisitionStatus::all()])->render();
+            } else {
+
+                return redirect()->route('home');
+            }
+        }
+        abort(403);
+
     }
 
     /**
