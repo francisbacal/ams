@@ -52,10 +52,10 @@ return [
             // 'username' => env('DB_USERNAME', 'forge'),
             // 'password' => env('DB_PASSWORD', ''),
 
-            'host' => 'sql12.freemysqlhosting.net',
-            'database' => 'sql12341441',
-            'username' => 'sql12341441',
-            'password' => 'duAVZ7CRGI',
+            'host' => 'remotemysql.com',
+            'database' => 'qXbd52LgZq',
+            'username' => 'qXbd52LgZq',
+            'password' => 'QkNUK5aocF',
 
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
