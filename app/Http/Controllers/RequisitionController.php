@@ -106,6 +106,13 @@ class RequisitionController extends Controller
     public function show(Requisition $requisition)
     {
         abort_if(Gate::denies('request-view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $user_id = Auth::user();
+
+        if ($requisition->user->id != 1 || $requisition->user->id != $user_id) {
+            return redirect()->route('home');
+        }
+
         return view('requisitions.partials.content.modalcontent')->with(['requisition' => $requisition, 'requisition_statuses' => RequisitionStatus::all()])->render();
     }
 
