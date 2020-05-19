@@ -33,7 +33,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-5">
-                <div class="login-box">
+                <div class="login-box m-0">
                     <div class="d-flex justify-content-center">
                         <img src="dist/img/AMS-logo.png" alt="AMS Logo" class="brand-img img-circle elevation-3"
                             style="opacity: .8">
