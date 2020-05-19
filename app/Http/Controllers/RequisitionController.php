@@ -57,7 +57,7 @@ class RequisitionController extends Controller
 
         $category_id = $request->category_id;
 
-        $assets = Asset::where('category_id', $category_id)->whereIn('asset_status_id', '1')->get();
+        $assets = Asset::where('category_id', $category_id)->where('asset_status_id', '1')->get();
 
         return $assets;
 

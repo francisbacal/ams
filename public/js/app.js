@@ -37500,15 +37500,17 @@ $('.deleteAssetBtn').click(function (e) {
 |============================================*/
 
 $('#requestCategorySelect').change(function () {
+  console.log('gumagana');
   var url = "/requisitions-category";
   var csrf = $('meta[name=csrf-token]').attr('content');
   var data = {
     'category_id': $(this).val()
   };
   var assetSelect = $('#assetSelect');
+  assetSelect.prop('disabled', true);
   $.ajax({
     url: url,
-    type: "POST",
+    type: "GET",
     headers: {
       'X-CSRF-TOKEN': csrf
     },
@@ -37518,6 +37520,7 @@ $('#requestCategorySelect').change(function () {
       $.each(response, function (i, asset) {
         assetSelect.append('<option value=' + '"' + asset.id + '">' + asset.name + ' - ' + asset.code + '</option>');
       });
+      assetSelect.prop('disabled', false);
     },
     error: function error(err) {
       console.log(err);

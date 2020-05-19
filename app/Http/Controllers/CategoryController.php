@@ -26,6 +26,8 @@ class CategoryController extends Controller
 
         $categories = Category::all();
 
+        $categ = Asset::where('category_id', 10)->get();
+
         foreach ($categories as $category) {
             $categoryStock = CategoryStock::where('category_id', $category->id)->get()->first();
             $assets = Asset::where('category_id', $category->id)->get();
@@ -167,13 +169,27 @@ class CategoryController extends Controller
     {
         abort_if(Gate::denies('category-create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $this->validate($request, [
+        $validatedData = $this->validate($request, [
             'name' => 'required|unique:categories,name|string|max:30',
         ]);
-        $input = $request->all();
-        $input['parent_id'] = empty($input['parent_id']) ? null : $input['parent_id'];
+        $category = new Category($validatedData);
+        $category->save();
 
-        Category::create($input);
+        // Create new stock
+
+        $categoryStock = new CategoryStock();
+
+        $categoryStock->category_id = $category->id;
+        $categoryStock->available = 0;
+        $categoryStock->allocated = 0;
+        $categoryStock->reserved = 0;
+        $categoryStock->for_diagnosis = 0;
+        $categoryStock->for_repair = 0;
+
+        $categoryStock->save();
+
+        // $input['parent_id'] = empty($input['parent_id']) ? null : $input['parent_id'];
+        // Category::create($input);
         return back()->with('success', 'New Category added successfully.');
     }
 
