@@ -48,7 +48,7 @@
                                 <div class="input-group mb-3">
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="admin@admin.com" required autocomplete="email" autofocus>
+                                        value="admin@admin.com" placeholder="admin@admin.com // demo" required autocomplete="email" autofocus>
                                         {{-- value="{{ old('email') }}" required autocomplete="email" autofocus> --}}
 
                                     <div class="input-group-append">
@@ -66,7 +66,7 @@
                                 <div class="input-group mb-3">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        value="password123" required autocomplete="current-password">
+                                        value="password123" placeholder="password123 // demo" required autocomplete="current-password">
 
                                     <div class="input-group-append">
                                         <div class="input-group-text">
